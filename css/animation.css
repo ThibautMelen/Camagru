@@ -1,0 +1,120 @@
+/*****************************************************************
+	MENU LEFT BG
+*****************************************************************/
+
+
+@keyframes bim-boom {
+0% { transform: scale3d(1, 1, 1);}  
+30% { transform: scale3d(1.25, 0.75, 1);}  
+40% { transform: scale3d(0.75, 1.25, 1);}  
+50% { transform: scale3d(1.15, 0.85, 1);}  
+65% { transform: scale3d(0.95, 1.05, 1);}  
+75% { transform: scale3d(1.05, 0.95, 1);}  
+100% { transform: scale3d(1, 1, 1);}  }
+.bim-boom {
+    animation: bim-boom 2.5s ease-out 0s 1 normal forwards running;
+}
+
+/********* BLACK IN BLACK *********/
+@keyframes go-to-black{
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes go-to-no{
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+.go-to-right-black {
+    opacity: 0;
+    background-color: #000000bf;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    overflow: hidden;
+    animation: go-to-black .7s ease-out 0s 1 normal forwards running, go-to-right .6s ease-out 0s 1 normal forwards running;
+}
+.go-to-left-no {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    overflow: hidden;
+    animation: go-to-no .7s ease-out 0s 1 normal forwards running, go-to-left .6s ease-out 0s 1 normal forwards running;
+}
+
+
+
+
+
+
+
+
+/********* GO TO LEFT *********/
+@keyframes go-to-left{
+    0% {
+        transform: translate3d(20em, 0, 0);
+    }
+    100% {
+        transform: translate3d(0em, 0, 0);
+    }
+}
+.go-to-left {
+    animation: go-to-left .6s ease-out 0s 1 normal forwards running;
+}
+
+/********* GO TO RIGHT *********/
+@keyframes go-to-right {
+    100% {
+        transform: translate3d(20em, 0, 0);
+    }
+}
+.go-to-right {
+    animation: go-to-right .6s ease-out 0s 1 normal forwards running;
+}
+
+
+
+
+
+/********* FADE IN LEFT *********/
+@keyframes fade-in-left {
+0% {
+    opacity: 0;
+    transform: translate3d(-20em, 0, 0);
+}
+100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+}
+.fade-in-left {
+    visibility: visible;
+    animation: fade-in-left .6s ease-out 0s 1 normal forwards running;
+}
+
+/********* FADE OU LEFT *********/
+@keyframes fade-out-left {
+0% {
+    opacity: 1;
+}
+
+100% {
+    opacity: 0;
+    transform: translate3d(-20em, 0, 0);
+    visibility: hidden;
+}
+}
+.fade-out-left {
+    visibility: visible;
+    animation: fade-out-left .6s ease-out 0s 1 normal forwards running;
+}
