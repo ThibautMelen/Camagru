@@ -1,0 +1,258 @@
+/*****************************************************************
+	HEADER
+*****************************************************************/
+header {
+    height: 75px;
+    background-color: #f4f7f6;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    border-bottom : 2px solid #00000009;
+    position: relative;
+}
+
+/********* HEADER OPEN NAV *********/
+header div#open-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 2em;
+    border-right: 2px solid #00000009;
+    cursor: pointer;
+    z-index: 9;
+}
+header div#open-nav p, nav ul > li {
+    letter-spacing: .2px;
+    margin: 0 1em;
+    font-size: .85em;
+    text-transform: uppercase;
+    white-space:nowrap;
+}
+
+/* hamburger */
+#hamburger {
+    width: 25px;
+    height: 18px;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    z-index: 10;
+}
+#hamburger span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #424242;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+/* if close */
+#hamburger span:nth-child(1) {
+    top: 0px;
+    transform-origin: left center;
+}
+#hamburger span:nth-child(2) {
+    top: 7px;
+    transform-origin: left center;
+}
+#hamburger span:nth-child(3) {
+    top: 14px;
+    transform-origin: left center;
+}
+/* else open */
+#hamburger.open span:nth-child(1) {
+    transform: rotate(45deg);
+    top: -3px;
+    left: 8px;
+}
+#hamburger.open span:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+}
+#hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 15px;
+    left: 8px;
+}
+
+/********* HEADER LOGO *********/
+header div.logo h2 {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 0 0 calc(5vw + 1em);
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 700;
+}
+
+/********* HEADER LOGIN / REGISTER *********/
+
+/* IF NO LOGO */
+header div.reg-log {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+header div.reg-log a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 calc(4vw + 2em);
+    letter-spacing: 1px;
+    font-size: .8em;
+    text-transform: uppercase;
+    color: #424242;
+    white-space:nowrap;
+}
+header div.reg-log a:nth-child(2) {
+    background-color: #01a3a4;
+    color: #fff;
+}
+
+/* IF LOG */
+header div.account {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 calc(4vw + 1em);
+}
+header div.account img {
+    border-radius: 100%;
+    width: 2.4em;
+    height: 2.4em;
+}
+header div.account p {
+    font-size: .9em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 400;
+    padding: 1em;
+}
+
+header div.account ul {
+    visibility: hidden;
+    opacity: 0;
+
+    z-index: 200;
+    position: absolute;
+    top: 4.4em;
+    right: 3.5em;
+    width: 15em;
+
+    background-color: #fff;;
+    box-shadow: 0px 0px 11px 1px #0000000f;
+    border-radius: 5px;
+    
+    transform: translateY(20px);
+    transition: all .4s ease-in-out;
+}
+
+header div.account ul li:hover {
+    background-color: #e6eaea42;
+    transition: all .2s ease-in-out;
+}
+header div.account ul li {
+    padding: 1.5em 2em; 
+    border-bottom : 2px solid #00000009;
+    font-weight: 500;
+}
+header div.account ul a:nth-last-child(1) li{
+    text-align: right;
+    letter-spacing: 2px;
+    font-size: .85em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 300;
+}
+
+header div.account:hover ul, header div.account:active ul, header div.account:focus ul{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/*****************************************************************
+	NAV
+*****************************************************************/
+
+/********* NAV CONTAINER *********/
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 320px;
+    height: 100vh;
+    background-color: #f4f7f6;
+    visibility: hidden;
+}
+nav ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+nav ul > li:nth-child(1) {
+    text-align: right;
+    display: inline;
+    cursor: pointer;
+}
+nav ul > li:nth-child(1) span {
+    text-align: right;
+    font-weight: 700;
+}
+nav ul .activepage {
+    color: #01a3a4;
+}
+nav ul li {
+    padding: 1.5em 2em; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom : 2px solid #00000009;
+}
+nav ul li:hover {
+    background-color: #e6eaea42;
+    transition: all .2s ease-in-out;
+}
+nav ul a{
+    font-weight: 500;
+}
+
+/*****************************************************************
+	FOOTER
+*****************************************************************/
+footer svg {
+    width: 1.35rem;
+    fill: #ee5552;
+    margin: 0 .3rem;
+}
+
+footer {
+    padding: calc(2vw + 1em);
+    background-color: #fff;
+}
+
+footer p {
+    display: flex;
+    justify-content: flex-end;
+    padding: .2em;
+    font-size: .9em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 300;
+}
+
+footer p a, footer p strong {
+    margin-left: .2em;
+    font-weight: 500;
+}

@@ -1,0 +1,40 @@
+/*****************************************************************
+	SECTION
+*****************************************************************/
+section#log-reg {
+    padding: 2em calc(2em + 20vw);
+}
+
+section#log-reg h1 {
+    font-size: 1.1em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 600;
+    padding: 1em 1em 2em 0;
+}
+section#log-reg h1 > span {
+    letter-spacing: .05em;
+    font-size: .8em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 400;
+}
+
+/*****************************************************************
+	REGISTER
+*****************************************************************/
+section#log-reg form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+section#log-reg form input{
+    padding: 2em;
+    margin-bottom: 2em;
+}
+section#log-reg form input[type="submit"]{
+    cursor: pointer;
+    background-color: aquamarine;
+}

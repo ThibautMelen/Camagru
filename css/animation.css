@@ -1,8 +1,6 @@
 /*****************************************************************
 	MENU LEFT BG
 *****************************************************************/
-
-
 @keyframes bim-boom {
 0% { transform: scale3d(1, 1, 1);}  
 30% { transform: scale3d(1.25, 0.75, 1);}  
@@ -44,6 +42,8 @@
     animation: go-to-black .7s ease-out 0s 1 normal forwards running, go-to-right .6s ease-out 0s 1 normal forwards running;
 }
 .go-to-left-no {
+    opacity: 0;
+    background-color: #000000bf;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -51,13 +51,6 @@
     overflow: hidden;
     animation: go-to-no .7s ease-out 0s 1 normal forwards running, go-to-left .6s ease-out 0s 1 normal forwards running;
 }
-
-
-
-
-
-
-
 
 /********* GO TO LEFT *********/
 @keyframes go-to-left{
@@ -70,6 +63,7 @@
 }
 .go-to-left {
     animation: go-to-left .6s ease-out 0s 1 normal forwards running;
+    z-index: 2;
 }
 
 /********* GO TO RIGHT *********/
@@ -80,11 +74,8 @@
 }
 .go-to-right {
     animation: go-to-right .6s ease-out 0s 1 normal forwards running;
+    z-index: 2;
 }
-
-
-
-
 
 /********* FADE IN LEFT *********/
 @keyframes fade-in-left {

@@ -1,0 +1,108 @@
+/*****************************************************************
+	GALERIE
+*****************************************************************/
+section{
+    padding: 2em;
+}
+
+section h1 {
+    font-size: 1.1em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 600;
+    padding: 1em 1em 2em 1em;
+}
+section h1 > span {
+    letter-spacing: .05em;
+    font-size: .8em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 400;
+}
+
+/********* POST LIST *********/
+div#post-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/********* POST *********/
+div.post {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 20em;
+    margin: 1em;
+    background: #fff;
+    border-radius: .4em;
+}
+
+/********* FIGURE IMG *********/
+div.post figure> img {
+    width: 20em;
+}
+
+/********* POST USER *********/
+div.post div.post-user a {
+    display: flex;
+    align-items: center;
+    padding: 1em 1em .1em 1.5em;
+    width: 20em;
+}
+div.post div.post-user img {
+    border-radius: 100%;
+    width: 1.8em;
+    height: 1.8em;
+}
+div.post div.post-user h3 {
+    font-size: .8em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 300;
+    padding: 0 .6em;
+}
+
+/********* POST ACTION *********/
+div.post div.post-action {
+    padding: .1em 1.5em 1em 1.5em;
+    width: 20em;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+div.post div.post-action div {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 .4em;
+    cursor: pointer;
+}
+div.post div.post-action svg {
+    width: 1.1em;
+}
+div.post div.post-action p {
+    margin: 0 0 0 0.4em;
+    font-size: .8em;
+    font-weight: 500;
+    color: #adb4b9;
+}
+
+/********* PAGE ACTUEl *********/
+div.actuel-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 1.5em 0 1em 0;
+}
+
+div.actuel-page a, div.actuel-page p {
+    background-color: #fff;
+    padding: 1.5em 3.5em;
+    font-size: .9em;
+    text-transform: uppercase;
+    white-space:nowrap;
+    font-weight: 500;
+    margin: 1em;
+    color: #adb4b9;
+}
