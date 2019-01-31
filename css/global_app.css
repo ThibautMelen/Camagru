@@ -1,7 +1,7 @@
 /*****************************************************************
 	HEADER
 *****************************************************************/
-header {
+header#header {
     height: 75px;
     background-color: #f4f7f6;
     display: flex;
@@ -13,7 +13,7 @@ header {
 }
 
 /********* HEADER OPEN NAV *********/
-header div#open-nav {
+header#header div#open-nav {
     display: flex;
     align-items: center;
     padding: 0 2em;
@@ -21,7 +21,7 @@ header div#open-nav {
     cursor: pointer;
     z-index: 9;
 }
-header div#open-nav p, nav ul > li {
+header#header div#open-nav p, nav ul > li {
     letter-spacing: .2px;
     margin: 0 1em;
     font-size: .85em;
@@ -85,7 +85,7 @@ header div.logo h2 {
     height: 100%;
     padding: 0 0 0 calc(5vw + 1em);
     letter-spacing: 1px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-transform: uppercase;
     white-space:nowrap;
     font-weight: 700;
@@ -238,19 +238,23 @@ footer svg {
 }
 
 footer {
-    padding: calc(2vw + 1em);
     background-color: #fff;
+    width: 100vw;
 }
 
 footer p {
     display: flex;
     justify-content: flex-end;
-    padding: .2em;
+    padding: 3em calc(2vw + 1em) .5em calc(2vw + 1em);
     font-size: .9em;
     text-transform: uppercase;
     white-space:nowrap;
     font-weight: 300;
 }
+footer p:nth-child(2) {
+    padding: .5em calc(2vw + 1em) 3em calc(2vw + 1em);
+}
+
 
 footer p a, footer p strong {
     margin-left: .2em;

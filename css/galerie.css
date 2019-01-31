@@ -33,7 +33,7 @@ div.post {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 20em;
+    width: 26em;
     margin: 1em;
     background: #fff;
     border-radius: .4em;
@@ -41,7 +41,7 @@ div.post {
 
 /********* FIGURE IMG *********/
 div.post figure> img {
-    width: 20em;
+    width: 26em;
 }
 
 /********* POST USER *********/
@@ -49,7 +49,7 @@ div.post div.post-user a {
     display: flex;
     align-items: center;
     padding: 1em 1em .1em 1.5em;
-    width: 20em;
+    width: 26em;
 }
 div.post div.post-user img {
     border-radius: 100%;
@@ -66,8 +66,8 @@ div.post div.post-user h3 {
 
 /********* POST ACTION *********/
 div.post div.post-action {
-    padding: .1em 1.5em 1em 1.5em;
-    width: 20em;
+    padding: 0em 1.5em 1em 1.5em;
+    width: 26em;
     display: inline-flex;
     justify-content: flex-end;
 }
@@ -87,13 +87,58 @@ div.post div.post-action p {
     color: #adb4b9;
 }
 
+/********* LIST COMMENT *********/
+div.post div#list-comment {
+    width: 26em;
+    padding: 0.4em 1.5em;
+
+    border-top: 2px solid #adb4b926;
+    border-bottom: 2px solid #adb4b926;
+    overflow: auto;
+    height: 5em;
+}
+
+div.post div#list-comment p {
+    letter-spacing: 0.01em;
+    font-size: 0.8em;
+    white-space: inherit;
+    font-weight: 400;
+    line-height: 19px;
+    padding: 0.4em 0;
+    width: 100%;
+}
+div.post div#list-comment strong {
+    margin-right: .4em;
+    font-weight: 500;
+}
+
+/********* POST COMMENT *********/
+div.post form.post-comment {
+    width: 26em;
+    display: inline-flex;
+    justify-content: flex-start;
+}
+
+div.post form.post-comment input[type=text]{
+    width: 100%;
+    padding: 1.7em 2em;
+    background-color: #adb4b90a;
+    letter-spacing: .05em;
+    font-size: 0.8em;
+    white-space: nowrap;
+    font-weight: 400;
+    color: #717171;
+}
+
+
 /********* PAGE ACTUEl *********/
 div.actuel-page {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: center;
     padding: 1.5em 0 1em 0;
+    width: 100vw;
 }
 
 div.actuel-page a, div.actuel-page p {

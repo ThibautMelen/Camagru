@@ -17,11 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("header").classList.add("go-to-left");
                 document.getElementById("header").classList.remove("go-to-right");
 
-                document.getElementById("galerie").classList.add("go-to-left");
-                document.getElementById("galerie").classList.remove("go-to-right");
-
                 document.getElementById("footer").classList.add("go-to-left");
                 document.getElementById("footer").classList.remove("go-to-right");
+
+                document.getElementById("sect").classList.add("go-to-left");
+                document.getElementById("sect").classList.remove("go-to-right");
             }
             else
             {
@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("header").classList.remove("go-to-left");
                 document.getElementById("header").classList.add("go-to-right");
             
-                document.getElementById("galerie").classList.remove("go-to-left");
-                document.getElementById("galerie").classList.add("go-to-right");
-
                 document.getElementById("footer").classList.remove("go-to-left");
                 document.getElementById("footer").classList.add("go-to-right");
+
+                document.getElementById("sect").classList.remove("go-to-left");
+                document.getElementById("sect").classList.add("go-to-right");
             }
         });
     });
@@ -55,18 +55,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 document.getElementById("wrapper").classList.remove("go-to-right-black");
                 document.getElementById("wrapper").classList.add("go-to-left-no");
-               
+                
                 document.getElementById("nav").classList.remove("fade-in-left");
-                document.getElementById("nav").classList.add("fade-out-left");                
-               
+                document.getElementById("nav").classList.add("fade-out-left");
+
                 document.getElementById("header").classList.add("go-to-left");
                 document.getElementById("header").classList.remove("go-to-right");
 
-                document.getElementById("galerie").classList.add("go-to-left");
-                document.getElementById("galerie").classList.remove("go-to-right");
-
                 document.getElementById("footer").classList.add("go-to-left");
                 document.getElementById("footer").classList.remove("go-to-right");
+
+                document.getElementById("sect").classList.add("go-to-left");
+                document.getElementById("sect").classList.remove("go-to-right");    
             }
         });
     });
@@ -88,11 +88,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("header").classList.add("go-to-left");
                 document.getElementById("header").classList.remove("go-to-right");
 
-                document.getElementById("galerie").classList.add("go-to-left");
-                document.getElementById("galerie").classList.remove("go-to-right");
-
                 document.getElementById("footer").classList.add("go-to-left");
                 document.getElementById("footer").classList.remove("go-to-right");
+
+                document.getElementById("sect").classList.add("go-to-left");
+                document.getElementById("sect").classList.remove("go-to-right");
             }
         });
     });
