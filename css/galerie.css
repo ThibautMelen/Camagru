@@ -39,9 +39,11 @@ div.post {
     border-radius: .4em;
 }
 
+
+
 /********* FIGURE IMG *********/
 div.post figure> img {
-    width: 26em;
+    width: 100%;
 }
 
 /********* POST USER *********/
@@ -117,6 +119,7 @@ div.post form.post-comment {
     width: 26em;
     display: inline-flex;
     justify-content: flex-start;
+    position: relative;
 }
 
 div.post form.post-comment input[type=text]{
@@ -130,6 +133,56 @@ div.post form.post-comment input[type=text]{
     color: #717171;
 }
 
+
+/********* POST DELETE *********/
+div.post div#delete-post {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
+    right: 15px;
+    top: 25px;
+    cursor: pointer;
+}
+div.post div#delete-post div:nth-child(-n+3){
+    background: #717171;
+    width: .3em;
+    height: .3em;
+    border-radius: 100%;
+    margin: .1em;
+}
+/********* POST DELETE DIV *********/
+div.post div#open-delete-post {
+    visibility: hidden;
+    opacity: 0;
+
+    z-index: 200;
+    position: absolute;
+    top: 1.5em;
+    right: 0em;
+    height: 3em;
+    width: 10em;
+    background-color: #fff;
+    box-shadow: 0px 0px 11px 1px #0000000f;
+    border-radius: 5px;
+    transform: translateY(20px);
+    transition: all .4s ease-in-out;
+}
+div.post div#open-delete-post p {
+    text-align: center;
+    margin: 1.4em;
+    color: #ee5552;
+    font-size: .8em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+div.post div#delete-post:hover #open-delete-post, div.post div#delete-post:active div#open-delete-post, div.post div#delete-post:focus div#open-delete-post{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /********* PAGE ACTUEl *********/
 div.actuel-page {

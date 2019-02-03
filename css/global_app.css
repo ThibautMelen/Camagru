@@ -152,7 +152,6 @@ header div.account ul {
     transform: translateY(20px);
     transition: all .4s ease-in-out;
 }
-
 header div.account ul li:hover {
     background-color: #e6eaea42;
     transition: all .2s ease-in-out;
