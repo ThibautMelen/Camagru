@@ -15,6 +15,7 @@
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
 
 </head>
 <body>
@@ -34,33 +35,34 @@
         </div>
 
         <div class="logo">
-            <h2><a class="bim-boom" href="index.html">camagru</a></h2>
+            <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
         <!-- IF NO LOG -->
         <div class="reg-log">
-            <a href="login.html">login</a>
-            <a href="register.html">register</a>
+            <a href="login.php">login</a>
+            <a href="register.php">register</a>
         </div>
     </header>
    
     <nav id="nav">
         <ul class="menu">
             <li id="menu-close"><span>X</span> CLOSE</li>
-            <a href="index.html"><li>Galerie</li></a>
-            <a href="studio.html"><li>Studio</li></a>
+            <a href="index.php"><li>Galerie</li></a>
+            <a href="studio.php"><li>Studio</li></a>
             <a href=""><li>Partager</li></a>
         </ul>
     </nav>
 
     <!-- GALERIE -->
     <section id="sect">
-        <h1>Login<span> to Camagru</span></h1>
+        <h1>Register<span> for Camagru Studio</span></h1>
 
         <form action="">
-            <input id="login_username" name="login_username" type="text" placeholder="Username" required="required" maxlength="180">
-            <input id="login_password" name="login_password" type="password" placeholder="Password" required="required">
-            <input id="login_submit" type="submit" value="login">
+            <input id="register_username" name="register_username" type="text" placeholder="Username" required="required" maxlength="180">
+            <input id="register_email" name="register_email" type="email" placeholder="E-mail" required="required" maxlength="180">
+            <input id="register_password" name="register_password" type="password" placeholder="Password" required="required">
+            <input id="register_submit" type="submit" value="create my account">
         </form> 
         
 

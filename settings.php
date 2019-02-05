@@ -35,34 +35,40 @@
         </div>
 
         <div class="logo">
-            <h2><a class="bim-boom" href="index.html">camagru</a></h2>
+            <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-        <!-- IF NO LOG -->
-        <div class="reg-log">
-            <a href="login.html">login</a>
-            <a href="register.html">register</a>
+        <!-- IF IS LOG -->
+        <div class="account">
+            <p>Miguel</p>
+            <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
+            
+            <ul>
+                <a href="profile.php"><li>Profile</li></a>
+                <a href="settings.php"><li>Settings</li></a>
+                <a href="#"><li>log out</li></a>
+            </ul>
         </div>
     </header>
    
     <nav id="nav">
         <ul class="menu">
             <li id="menu-close"><span>X</span> CLOSE</li>
-            <a href="index.html"><li>Galerie</li></a>
-            <a href="studio.html"><li>Studio</li></a>
+            <a href="index.php"><li>Galerie</li></a>
+            <a href="studio.php"><li>Studio</li></a>
             <a href=""><li>Partager</li></a>
         </ul>
     </nav>
 
     <!-- GALERIE -->
     <section id="sect">
-        <h1>Register<span> for Camagru Studio</span></h1>
+        <h1>Settings<span> , change your personel data</span></h1>
 
         <form action="">
-            <input id="register_username" name="register_username" type="text" placeholder="Username" required="required" maxlength="180">
-            <input id="register_email" name="register_email" type="email" placeholder="E-mail" required="required" maxlength="180">
-            <input id="register_password" name="register_password" type="password" placeholder="Password" required="required">
-            <input id="register_submit" type="submit" value="create my account">
+            <input id="change_username" name="change_username" type="text" placeholder="Username" required="required" maxlength="180">
+            <input id="change_email" name="change_email" type="email" placeholder="E-mail" required="required" maxlength="180">
+            <input id="change_password" name="change_password" type="password" placeholder="Password" required="required">
+            <input id="change_submit" type="submit" value="save">
         </form> 
         
 

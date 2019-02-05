@@ -19,6 +19,7 @@
 
 </head>
 <body>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script async src="js/animation.js"></script>
     <script async src="js/webcam.js"></script>
 
@@ -36,7 +37,7 @@
         </div>
 
         <div class="logo">
-            <h2><a class="bim-boom" href="index.html">camagru</a></h2>
+            <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
         <!-- IF IS LOG -->
@@ -45,8 +46,8 @@
             <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
             
             <ul>
-                <a href="profile.html"><li>Profile</li></a>
-                <a href="settings.html"><li>Settings</li></a>
+                <a href="profile.php"><li>Profile</li></a>
+                <a href="settings.php"><li>Settings</li></a>
                 <a href="#"><li>log out</li></a>
             </ul>
         </div>
@@ -55,8 +56,8 @@
     <nav id="nav">
         <ul class="menu">
             <li id="menu-close"><span>X</span> CLOSE</li>
-            <a href="index.html"><li>Galerie</li></a>
-            <a href="studio.html"><li class="activepage">Studio</li></a>
+            <a href="index.php"><li>Galerie</li></a>
+            <a href="studio.php"><li class="activepage">Studio</li></a>
             <a href=""><li>Partager</li></a>
         </ul>
     </nav>
@@ -69,11 +70,13 @@
         <div class="middle">
                 <div id="webcam">
 
-                    <video autoplay>
-                    </video>
+                    <video autoplay></video>
+                    <canvas></canvas>
+                    <button id="cssfilters-apply">Apply CSS filter</button>
 
-                    <button>PHOTO</button>
-                    <button>button 2</button>
+                    <img id="img" src="" alt="">
+                    <button id="screenshot">start video</button>
+                    <button id="screenshot-button">button 2</button>
                     <button>button 3</button>
                 </div>
 
