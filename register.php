@@ -1,3 +1,56 @@
+<?php
+
+// CONEXION A LA BDD
+$user = "root";
+$pass = "root";
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=camagru', $user, $pass);
+} catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+
+//REGISTER
+if(isset($_POST['register_submit'])) {
+    $register_pseudo = htmlspecialchars($_POST['register_pseudo']);
+    $register_email = htmlspecialchars($_POST['register_email']);
+    $register_password = sha1($_POST['register_password']);
+    if(!empty($_POST['register_pseudo']) AND !empty($_POST['register_email']) AND !empty($_POST['register_password'])) {
+        if(strlen($register_pseudo) <= 255 )
+        {
+            $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+            $reqpseudo->execute(array($register_pseudo));
+            if($reqpseudo->rowCount() == 0)
+            {
+                if(filter_var($register_email, FILTER_VALIDATE_EMAIL))
+                {
+                    $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
+                    $reqmail->execute(array($register_email));
+                    if($reqmail->rowCount() == 0) {
+                        $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass) VALUES(?, ?, ?)");
+                        $insertmbr->execute(array($register_pseudo, $register_email, $register_password));
+                        $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
+                    }
+                    else 
+                        $register_error = "Adresse mail déjà utilisée !";
+                }
+                else
+                    $register_error = "entre un email valide";
+            }
+            else
+                $register_error = "Pseudo déjà utilisée !";
+        }
+        else
+            $register_error = "Pseudo ne doit pas depasser 255 car";
+    }
+    else
+        $register_error = "All fields must be completed in this Section";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,17 +107,25 @@
         </ul>
     </nav>
 
-    <!-- GALERIE -->
+    <!-- REGISTER -->
     <section id="sect">
         <h1>Register<span> for Camagru Studio</span></h1>
 
-        <form action="">
-            <input id="register_username" name="register_username" type="text" placeholder="Username" required="required" maxlength="180">
-            <input id="register_email" name="register_email" type="email" placeholder="E-mail" required="required" maxlength="180">
+        <form method="POST" action="">
+            <input id="register_pseudo" name="register_pseudo" value="<?php if(isset($register_pseudo)) {echo $register_pseudo;} ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
+            <input id="register_email" name="register_email" value="<?php if(isset($register_email)) {echo $register_email;} ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
             <input id="register_password" name="register_password" type="password" placeholder="Password" required="required">
-            <input id="register_submit" type="submit" value="create my account">
-        </form> 
-        
+            <input id="register_submit" name="register_submit" type="submit" value="create my account">
+        </form>
+
+        <?php
+            if(isset($register_error)) {
+                echo $register_error;
+            }
+            if(isset($register_success)) {
+                echo $register_success;
+            }
+        ?>
 
     </section>
 

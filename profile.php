@@ -1,3 +1,40 @@
+<?php
+session_start();
+
+// CONEXION A LA BDD
+$user = "root";
+$pass = "root";
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=camagru', $user, $pass);
+} catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+//PROFILE
+if (isset($_POST['login_submit']))
+{
+    $login_pseudo = htmlspecialchars($_POST['login_pseudo']);
+    $login_password = sha1($_POST['login_password']);
+    if(!empty($login_pseudo) AND !empty($login_password)) {
+        $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ? AND pass = ?");
+        $requser->execute(array($login_pseudo, $login_password));
+        $userexist = $requser->rowCount();
+        if($userexist == 1) {
+            $userinfo = $requser->fetch();
+            $_SESSION['id'] = $userinfo['id'];
+            $_SESSION['pseudo'] = $userinfo['pseudo'];
+            $_SESSION['email'] = $userinfo['email'];
+            header("Location: profile.php?id=".$_SESSION['id']);
+        } else {
+           $login_error = "Mauvais mail ou mot de passe !";
+        }
+    }else{
+        $login_error = "Remplie tout les champs FDP";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
