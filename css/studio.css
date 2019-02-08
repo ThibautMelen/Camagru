@@ -1,23 +1,15 @@
 /*****************************************************************
-	GALERIE
+	STUDIO
 *****************************************************************/
 section{
-    padding: 2em;
+    padding: 2em 5vw;
 }
 
-section h1 {
-    font-size: 1.1em;
-    text-transform: uppercase;
-    white-space:nowrap;
-    font-weight: 600;
-    padding: 1em 1em 2em 1em;
-}
-section h1 > span {
-    letter-spacing: .05em;
-    font-size: .8em;
-    text-transform: uppercase;
-    white-space:nowrap;
-    font-weight: 400;
+footer{
+    background-color: #fff;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
 }
 
 /*****************************************************************
@@ -27,7 +19,7 @@ section div.middle {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 section div.middle div#post-list  {
@@ -48,33 +40,42 @@ section div.middle div.post {
 *****************************************************************/
 section div.middle div#webcam{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
-
+    padding: 1em 0;
+    width: 63vw;
+    max-width: 80em;
+    min-width: 24em;
 }
 
 section div.middle div#webcam video{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 710px;
-    padding: 1em;
-    height: 430px;
-    border: 5px solid black;
+    width: 100%;
 }
 
-section div.middle div#webcam button{
+section div.middle div#webcam div#button-option{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 5em;
-    height: 4em;
-    padding: 1em;
-    margin: 1em;
-    border-radius: 12px;
-    background-color: blueviolet;
-    color: white;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 1em 0;
+    overflow-x: auto;
 }
+
+section div.middle div#webcam div#button-option button{
+    color: white;
+    cursor: pointer;
+    background-color: #01a3a4;
+    margin-right: 1em;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 500;
+    padding: 1em;
+}
+
+section div.middle div#webcam div#button-option button:nth-child(1){
+    background-color: #38445b;
+}
+

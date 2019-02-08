@@ -11,7 +11,6 @@ try {
     die();
 }
 
-
 //LOGIN
 if (isset($_POST['login_submit']))
 {
@@ -27,12 +26,12 @@ if (isset($_POST['login_submit']))
             $_SESSION['pseudo'] = $userinfo['pseudo'];
             $_SESSION['email'] = $userinfo['email'];
             header("Location: profile.php?id=".$_SESSION['id']);
-        } else {
-           $login_error = "Mauvais mail ou mot de passe !";
         }
-    }else{
-        $login_error = "Remplie tout les champs FDP";
+        else
+           $login_error = "Mauvais mail ou mot de passe !";
     }
+    else
+        $login_error = "Remplie tout les champs FDP";
 }
 
 ?>

@@ -69,15 +69,17 @@
         <h1>Studio<span> Camagru</span></h1>
         <div class="middle">
                 <div id="webcam">
-
                     <video autoplay></video>
-                    <canvas></canvas>
-                    <button id="cssfilters-apply">Apply CSS filter</button>
-
-                    <img id="img" src="" alt="">
-                    <button id="screenshot">start video</button>
-                    <button id="screenshot-button">button 2</button>
-                    <button>button 3</button>
+                                         
+                     <div id="button-option">
+                        <button id="screenshot">Take A Picture</button>
+                        <button>Filter 1</button>
+                        <button>Filter 2</button>
+                        <button>Filter 3</button>
+                        <button>Filter 4</button>
+                     </div>
+                    
+                    <img id="img" alt="">
                 </div>
 
                 <div id="post-list">

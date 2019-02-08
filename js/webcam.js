@@ -1,5 +1,8 @@
 const constraints = {
-  video: true
+  video: { 
+    width: 1280,
+    height: 720
+  }
 };
 
 const handleSuccess = (stream) => {
@@ -12,8 +15,7 @@ const handleError = (error) => {
 }
 
 const video = document.querySelector('video');
-// const captureVideoButton = document.querySelector('#screenshot');
-const screenshotButton = document.querySelector('#screenshot-button');
+const screenshotButton = document.querySelector('#screenshot');
 const img = document.querySelector('#img');
 const canvas = document.createElement('canvas');
 

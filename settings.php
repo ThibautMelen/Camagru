@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <script src="js/animation.js"></script>
+    <script async src="js/animation.js"></script>
 
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>
