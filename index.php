@@ -1,3 +1,18 @@
+<?php
+
+// CONEXION A LA BDD
+include('libphp/cnct_bdd.php');
+session_start();
+
+include('libphp/usr_nav.php');
+
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,23 +51,8 @@
             <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-        <!-- IF NO LOG -->
-        <div class="reg-log">
-            <a href="login.php">login</a>
-            <a href="register.php">register</a>
-        </div>
+        <?php   echo $usr_nav;  ?>
 
-        <!-- IF IS LOG -->
-        <!-- <div class="account">
-            <p>Miguel</p>
-            <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
-            
-            <ul>
-                <a href="profile.php"><li>Profile</li></a>
-                <a href="settings.php"><li>Settings</li></a>
-                <a href="#"><li>log out</li></a>
-            </ul>
-        </div> -->
     </header>
    
     <nav id="nav">

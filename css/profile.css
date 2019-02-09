@@ -31,7 +31,7 @@ section header > p {
     font-weight: 600;
 }
 
-section header > p:nth-child(3) {
+section header a {
     margin-top: .2em;
     font-size: .8em;
     text-transform: uppercase;

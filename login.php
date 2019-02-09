@@ -1,15 +1,13 @@
 <?php
-session_start();
 
 // CONEXION A LA BDD
-$user = "root";
-$pass = "root";
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=camagru', $user, $pass);
-} catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage() . "<br/>";
-    die();
-}
+include('libphp/cnct_bdd.php');
+session_start();
+
+include('libphp/islog.php');
+//IF IS LOG REDIRECT
+if (islog())
+    header('Location: ../index.php');
 
 //LOGIN
 if (isset($_POST['login_submit']))
@@ -25,7 +23,7 @@ if (isset($_POST['login_submit']))
             $_SESSION['id'] = $userinfo['id'];
             $_SESSION['pseudo'] = $userinfo['pseudo'];
             $_SESSION['email'] = $userinfo['email'];
-            header("Location: profile.php?id=".$_SESSION['id']);
+            header('Location: ../index.php');
         }
         else
            $login_error = "Mauvais mail ou mot de passe !";
@@ -33,7 +31,6 @@ if (isset($_POST['login_submit']))
     else
         $login_error = "Remplie tout les champs FDP";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +53,7 @@ if (isset($_POST['login_submit']))
 
 </head>
 <body>
-    <script src="js/animation.js"></script>
+    <script async src="js/animation.js"></script>
 
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>
@@ -75,11 +72,11 @@ if (isset($_POST['login_submit']))
             <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-        <!-- IF NO LOG -->
-        <div class="reg-log">
-            <a href="login.php">login</a>
-            <a href="register.php">register</a>
-        </div>
+    <div class="reg-log">
+        <a href="login.php">login</a>
+        <a href="register.php">register</a>
+    </div>
+
     </header>
    
     <nav id="nav">

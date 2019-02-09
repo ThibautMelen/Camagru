@@ -1,22 +1,21 @@
 <?php
 
 // CONEXION A LA BDD
-$user = "root";
-$pass = "root";
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=camagru', $user, $pass);
-} catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage() . "<br/>";
-    die();
-}
+include('libphp/cnct_bdd.php');
+session_start();
 
+include('libphp/islog.php');
+//IF IS LOG REDIRECT
+if (islog())
+    header('Location: ../index.php');
 
 //REGISTER
-if(isset($_POST['register_submit'])) {
+if (isset($_POST['register_submit'])) {
     $register_pseudo = htmlspecialchars($_POST['register_pseudo']);
     $register_email = htmlspecialchars($_POST['register_email']);
     $register_password = sha1($_POST['register_password']);
-    if(!empty($_POST['register_pseudo']) AND !empty($_POST['register_email']) AND !empty($_POST['register_password'])) {
+    if(!empty($_POST['register_pseudo']) AND !empty($_POST['register_email']) AND !empty($_POST['register_password']))
+    {
         if(strlen($register_pseudo) <= 255 )
         {
             $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
@@ -47,7 +46,6 @@ if(isset($_POST['register_submit'])) {
     else
         $register_error = "All fields must be completed in this Section";
 }
-
 ?>
 
 
@@ -72,7 +70,7 @@ if(isset($_POST['register_submit'])) {
 
 </head>
 <body>
-    <script src="js/animation.js"></script>
+    <script async src="js/animation.js"></script>
 
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>

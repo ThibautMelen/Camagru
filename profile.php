@@ -1,38 +1,24 @@
 <?php
+// CONEXION A LA BDD
+include('libphp/cnct_bdd.php');
 session_start();
 
-// CONEXION A LA BDD
-$user = "root";
-$pass = "root";
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=camagru', $user, $pass);
-} catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage() . "<br/>";
-    die();
-}
+include('libphp/usr_nav.php');
 
 //PROFILE
-if (isset($_POST['login_submit']))
-{
-    $login_pseudo = htmlspecialchars($_POST['login_pseudo']);
-    $login_password = sha1($_POST['login_password']);
-    if(!empty($login_pseudo) AND !empty($login_password)) {
-        $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ? AND pass = ?");
-        $requser->execute(array($login_pseudo, $login_password));
-        $userexist = $requser->rowCount();
-        if($userexist == 1) {
-            $userinfo = $requser->fetch();
-            $_SESSION['id'] = $userinfo['id'];
-            $_SESSION['pseudo'] = $userinfo['pseudo'];
-            $_SESSION['email'] = $userinfo['email'];
-            header("Location: profile.php?id=".$_SESSION['id']);
-        } else {
-           $login_error = "Mauvais mail ou mot de passe !";
-        }
-    }else{
-        $login_error = "Remplie tout les champs FDP";
+if(isset($_GET['user'])) {
+    $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+    $requser->execute(array($_GET['user']));
+    $userexist = $requser->rowCount();
+    if($userexist == 1) {
+        $userinfo = $requser->fetch();
+        $profile_pseudo = $userinfo['pseudo'];
     }
+    else
+        header('Location: ../index.php');
 }
+else
+    header('Location: ../index.php');
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +42,7 @@ if (isset($_POST['login_submit']))
 
 </head>
 <body>
-    <script src="js/animation.js"></script>
+    <script async src="js/animation.js"></script>
 
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>
@@ -75,23 +61,8 @@ if (isset($_POST['login_submit']))
             <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-        <!-- IF NO LOG -->
-        <div class="reg-log">
-            <a href="login.php">login</a>
-            <a href="register.php">register</a>
-        </div>
+        <?php   echo $usr_nav;  ?>
 
-        <!-- IF IS LOG -->
-        <!-- <div class="account">
-            <p>Miguel</p>
-            <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
-            
-            <ul>
-                <a href="profile.php"><li>Profile</li></a>
-                <a href="settings.php"><li>Settings</li></a>
-                <a href="#"><li>log out</li></a>
-            </ul>
-        </div> -->
     </header>
    
     <nav id="nav">
@@ -106,11 +77,17 @@ if (isset($_POST['login_submit']))
     <!-- PROFILE -->
     <section id="sect">
 
-        <header class="profile-info">
+        <header>
             <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
-            <p>Miguel</p>
+            <p><?php   echo $profile_pseudo;  ?></p>
+            
             <!-- IF IS MY PROFILE -->
-            <p>edit</p>
+            <?php
+                if(isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $profile_pseudo)
+                    echo '<a href="settings.php">edit</a>';
+            ?>
+            
+            
         </header>
         
         <div id="post-list">
