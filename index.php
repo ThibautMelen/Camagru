@@ -6,10 +6,6 @@ session_start();
 
 include('libphp/usr_nav.php');
 
-
-
-
-
 ?>
 
 

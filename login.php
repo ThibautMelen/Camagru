@@ -7,7 +7,7 @@ session_start();
 include('libphp/islog.php');
 //IF IS LOG REDIRECT
 if (islog())
-    header('Location: ../index.php');
+    header('Location: ../login.php');
 
 //LOGIN
 if (isset($_POST['login_submit']))

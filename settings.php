@@ -1,3 +1,31 @@
+<?php
+
+// CONEXION A LA BDD
+include('libphp/cnct_bdd.php');
+session_start();
+
+include('libphp/usr_nav.php');
+//IF IS NOT LOG REDIRECT
+if (!(islog()))
+    header('Location: ../index.php');
+
+//PROFILE INFO
+if(isset($_SESSION['pseudo'])) {
+    $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+    $requser->execute(array($_SESSION['pseudo']));
+    $userexist = $requser->rowCount();
+    if($userexist == 1) {
+        $userinfo = $requser->fetch();
+    }
+    else
+        header('Location: ../login.php');
+}
+else
+    header('Location: ../login.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,17 +66,8 @@
             <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-        <!-- IF IS LOG -->
-        <div class="account">
-            <p>Miguel</p>
-            <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
-            
-            <ul>
-                <a href="profile.php"><li>Profile</li></a>
-                <a href="settings.php"><li>Settings</li></a>
-                <a href="#"><li>log out</li></a>
-            </ul>
-        </div>
+        <?php   echo $usr_nav;  ?>
+
     </header>
    
     <nav id="nav">
@@ -60,14 +79,15 @@
         </ul>
     </nav>
 
-    <!-- GALERIE -->
+    <!-- SETTINGS -->
     <section id="sect">
         <h1>Settings<span> , change your personel data</span></h1>
 
         <form action="">
-            <input id="change_username" name="change_username" type="text" placeholder="Username" required="required" maxlength="180">
-            <input id="change_email" name="change_email" type="email" placeholder="E-mail" required="required" maxlength="180">
-            <input id="change_password" name="change_password" type="password" placeholder="Password" required="required">
+            <input id="change_username" name="change_username" type="text" placeholder="Username" maxlength="180" value="<?php echo $userinfo['pseudo']?>">
+            <input id="change_email" name="change_email" type="email" placeholder="E-mail" maxlength="180" value="<?php echo $userinfo['email']?>">
+            <input id="change_confirm_password" name="change_confirm_password" type="password" placeholder="Old Password">
+            <input id="change_password" name="change_password" type="password" placeholder="New Password">
             <input id="change_submit" type="submit" value="save">
         </form> 
         
