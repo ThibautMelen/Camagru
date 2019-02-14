@@ -45,3 +45,35 @@ section form input[type="submit"]{
     background-color: #01a3a4;
     color: #fff;
 }
+
+/*****************************************************************
+	SETTING
+*****************************************************************/
+input[type="file"] {
+    color: transparent;
+    padding: 0;
+    margin-bottom: 0;
+}
+input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+input[type="file"]::before {
+    content: 'Select your avatar';
+    color: #424242;
+    display: inline-block;
+    background-color: #fff;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    padding: 2em;
+    margin-bottom: 2em;
+    letter-spacing: .05em;
+    font-size: 1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 400;
+    width: 100%;
+}
+
+  

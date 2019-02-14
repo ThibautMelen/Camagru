@@ -48,7 +48,6 @@ include('libphp/usr_nav.php');
         </div>
 
         <?php   echo $usr_nav;  ?>
-
     </header>
    
     <nav id="nav">

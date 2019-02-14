@@ -1,3 +1,19 @@
+<?php
+
+// CONEXION A LA BDD
+include('libphp/cnct_bdd.php');
+session_start();
+
+include('libphp/usr_nav.php');
+
+// IF NOT LOG REDIRECT
+if (!islog())
+    header('Location: ../index.php');
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,17 +56,7 @@
             <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-        <!-- IF IS LOG -->
-        <div class="account">
-            <p>Miguel</p>
-            <img src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/default/user7.jpg" alt="avatar">
-            
-            <ul>
-                <a href="profile.php"><li>Profile</li></a>
-                <a href="settings.php"><li>Settings</li></a>
-                <a href="#"><li>log out</li></a>
-            </ul>
-        </div>
+        <?php   echo $usr_nav;  ?>
     </header>
    
     <nav id="nav">
@@ -71,13 +77,14 @@
                 <div id="webcam">
                     <video autoplay></video>
                                          
-                     <div id="button-option">
-                        <button id="screenshot">Take A Picture</button>
-                        <button>Filter 1</button>
-                        <button>Filter 2</button>
-                        <button>Filter 3</button>
-                        <button>Filter 4</button>
-                     </div>
+                     <form id="button-option" method="POST" action="">
+                        
+                        <input id="screenshot" type="button" value="Take A Picture">
+                        <input type="button" value="Filter 1">
+                        <input type="button" value="Filter 2">
+                        <input type="button" value="Filter 3">
+                        <input type="button" value="Filter 4">
+                     </form>
                     
                     <img id="img" alt="">
                 </div>

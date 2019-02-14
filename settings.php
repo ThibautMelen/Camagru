@@ -9,7 +9,7 @@ include('libphp/usr_nav.php');
 if (!(islog()))
     header('Location: ../index.php');
 
-//PROFILE INFO
+//PROFILE SETTING INFO
 if(isset($_SESSION['pseudo'])) {
     $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
     $requser->execute(array($_SESSION['pseudo']));
@@ -23,6 +23,74 @@ if(isset($_SESSION['pseudo'])) {
 else
     header('Location: ../login.php');
 
+//NEW AREA
+if (isset($_POST['change_submit']))
+{
+    if(isset($_POST['change_pseudo']) && !empty($_POST['change_pseudo']) && $_POST['change_pseudo'] != $userinfo['pseudo']) {
+        $change_pseudo = htmlspecialchars($_POST['change_pseudo']);
+        $insertpseudo = $bdd->prepare("UPDATE member SET pseudo = ? WHERE id = ?");
+        $insertpseudo->execute(array($change_pseudo, $_SESSION['id']));
+        $_SESSION['pseudo'] = $change_pseudo;
+        header('Location: profile.php?user='.$_SESSION['pseudo']);
+    }
+    if(isset($_POST['change_email']) && !empty($_POST['change_email']) && $_POST['change_email'] != $userinfo['email']) {
+        $change_email = htmlspecialchars($_POST['change_email']);
+        $insertemail = $bdd->prepare("UPDATE member SET email = ? WHERE id = ?");
+        $insertemail->execute(array($change_email, $_SESSION['id']));
+        $_SESSION['email'] = $change_email;
+        header('Location: profile.php?user='.$_SESSION['pseudo']);
+    }
+    if(isset($_FILES['change_avatar']) && !empty(($_FILES['change_avatar']['name'])))
+    {
+        $sizemax = 2097152;
+        $validExtension = array('jpg', 'jpeg', 'png', 'gif');
+        if($_FILES['change_avatar']['name'] <= $sizemax)
+        {
+            $uploadExtension = strtolower(substr(strrchr($_FILES['change_avatar']['name'], '.'), 1));
+            if(in_array($uploadExtension, $validExtension))
+            {
+                $path = "avatar_member/".$_SESSION['id'].".".$uploadExtension;
+                $fileEnd = move_uploaded_file($_FILES['change_avatar']['tmp_name'], $path);
+                if($fileEnd)
+                {
+                    $updateAvatar = $bdd->prepare('UPDATE member SET avatar = ? WHERE id = ?');
+                    $updateAvatar->execute(array($_SESSION['id'].".".$uploadExtension, $_SESSION['id']));
+                    $_SESSION['avatar'] = $_SESSION['id'].".".$uploadExtension;
+                    header('Location: profile.php?user='.$_SESSION['pseudo']);
+                }else
+                    $settings_error = "Erreur durant l'importation de votre photo de profil";
+            }
+            else
+                $settings_error = "Votre image de profil doit etre au format jpg, jpeg, png ou gif";
+        }
+        else
+            $settings_error = "Votre image de profil doit faire moins de 2Mo";
+
+    }
+
+    if(isset($_POST['change_old_password']) && !empty($_POST['change_old_password']) && isset($_POST['change_password']) && !empty($_POST['change_password'])) {
+        $change_old_password = sha1($_POST['change_old_password']);
+        $change_password = sha1($_POST['change_password']);
+        if($change_old_password == $userinfo['pass'])
+        {
+            if($change_old_password != $change_password) {
+                $insertpass = $bdd->prepare("UPDATE member SET pass = ? WHERE id = ?");
+                $insertpass->execute(array($change_password, $_SESSION['id']));
+                header('Location: profile.php?user='.$_SESSION['pseudo']);
+             }
+             else
+                $settings_error = "Votre ancien et nouveau mot de passe sont similaires";
+        }
+        else
+            $settings_error = "Votre mot de passe n'est pas bon";
+     }
+
+    //NEW AREA ERROR
+    if (empty($_POST['change_pseudo']))
+        $settings_error = "Votre pseudo ne peut etre vide";
+    if (empty($_POST['change_email']))
+        $settings_error = "Votre email ne peut etre vide";
+}
 ?>
 
 
@@ -83,14 +151,20 @@ else
     <section id="sect">
         <h1>Settings<span> , change your personel data</span></h1>
 
-        <form action="">
-            <input id="change_username" name="change_username" type="text" placeholder="Username" maxlength="180" value="<?php echo $userinfo['pseudo']?>">
+        <form method="POST" action="" enctype= multipart/form-data>
+            <input id="change_pseudo" name="change_pseudo" type="text" placeholder="Pseudo" maxlength="180" value="<?php echo $userinfo['pseudo']?>">
             <input id="change_email" name="change_email" type="email" placeholder="E-mail" maxlength="180" value="<?php echo $userinfo['email']?>">
-            <input id="change_confirm_password" name="change_confirm_password" type="password" placeholder="Old Password">
+            <input id="change_avatar" name="change_avatar" type="file">
+            <input id="change_old_password" name="change_old_password" type="password" placeholder="Old Password">
             <input id="change_password" name="change_password" type="password" placeholder="New Password">
-            <input id="change_submit" type="submit" value="save">
+            <input id="change_submit" name="change_submit" type="submit" value="save">
         </form> 
         
+        <?php
+            if(isset($settings_error)) {
+                echo $settings_error;
+            }
+        ?>
 
     </section>
 

@@ -52,7 +52,7 @@ section div.middle div#webcam video{
     width: 100%;
 }
 
-section div.middle div#webcam div#button-option{
+section div.middle div#webcam form#button-option{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -62,7 +62,7 @@ section div.middle div#webcam div#button-option{
     overflow-x: auto;
 }
 
-section div.middle div#webcam div#button-option button{
+section div.middle div#webcam form#button-option input[type="button"]{
     color: white;
     cursor: pointer;
     background-color: #01a3a4;
@@ -75,7 +75,7 @@ section div.middle div#webcam div#button-option button{
     padding: 1em;
 }
 
-section div.middle div#webcam div#button-option button:nth-child(1){
+section div.middle div#webcam form#button-option input[type="button"]:nth-child(1){
     background-color: #38445b;
 }
 

@@ -19,6 +19,7 @@ section header {
 section header > img{
     border-radius: 100%;
     width: 5em;
+    height: 5em;
     border: 6px solid #01a3a4;
 }
 

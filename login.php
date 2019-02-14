@@ -23,10 +23,11 @@ if (isset($_POST['login_submit']))
             $_SESSION['id'] = $userinfo['id'];
             $_SESSION['pseudo'] = $userinfo['pseudo'];
             $_SESSION['email'] = $userinfo['email'];
+            $_SESSION['avatar'] = $userinfo['avatar'];
             header('Location: ../index.php');
         }
         else
-           $login_error = "Mauvais mail ou mot de passe !";
+           $login_error = "Mauvais pseudo ou mot de passe !";
     }
     else
         $login_error = "Remplie tout les champs FDP";
