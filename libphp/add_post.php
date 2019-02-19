@@ -14,7 +14,7 @@ $imgData = imagecreatefromstring($imgData);
 
 
 //SAVE POST IMG WEBCAM
-imagepng($imgData, "../data/tarace.png");
+imagepng($imgData, "../data/post/" .  "post_" . $_SESSION['id'] . "_" . time() . ".png");
 imagedestroy($imgData);
 
 

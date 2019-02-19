@@ -88,9 +88,13 @@ section div.middle div#webcam div#filter_img{
     width: 100%;
 }
 
-section div.middle div#webcam div#filter_img img:nth-child(1){
+section div.middle div#webcam div#filter_img img{
     position: absolute;
-    width: 40%;
+    width: 25%;
     top: 33px;
     left: 47px;
+    visibility: hidden;
+}
+section div.middle div#webcam div#filter_img img:nth-child(1){
+    visibility: visible;
 }

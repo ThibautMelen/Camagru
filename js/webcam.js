@@ -47,4 +47,5 @@ screenshotButton.onclick = video.onclick = () => {
 
 };
 
+
 window.addEventListener('load', startWebcam(), false);

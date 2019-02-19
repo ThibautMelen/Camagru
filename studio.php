@@ -70,17 +70,20 @@ if (!islog())
                 <div id="webcam">
 
                     <div id="filter_img">
-                        <img id="filter_0" src="data/filter_0.jpg" alt="">
+                        <img id="filter_0" src="data/filter/filter_0.png" alt="filter 0">
+                        <img id="filter_1" src="data/filter/filter_1.png" alt="filter 1">
+                        <img id="filter_2" src="data/filter/filter_2.png" alt="filter 2">
+                        <img id="filter_3" src="data/filter/filter_3.png" alt="filter 3">
                         <video autoplay></video>
                     </div>
 
                     <!-- input radio -->
                      <form id="button-option" method="POST" action="">
                         <input id="screenshot" type="button" value="Take A Picture">
-                        <input type="button" value="Filter 1">
-                        <input type="button" value="Filter 2">
-                        <input type="button" value="Filter 3">
-                        <input type="button" value="Filter 4">
+                        <input onclick="showHideFilter(0)" type="button" value="Filter 1">
+                        <input onclick="showHideFilter(1)" type="button" value="Filter 2">
+                        <input onclick="showHideFilter(2)" type="button" value="Filter 3">
+                        <input onclick="showHideFilter(3)" type="button" value="Filter 4">
                      </form>
                 </div>
 

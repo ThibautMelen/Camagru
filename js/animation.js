@@ -72,9 +72,10 @@
 
 //FILTER
 // close menu
-const showHideFilter = () => {
-    //#filter_[0 - 4] = css visibily hidden 
-    //#filter click = css visibily visible 
-  }
-  //send param on onclick function
+const showHideFilter = (filterNb) => {
+    console.log(filterNb);
+    for (let i = 0; i < 4; i++)
+        document.getElementById(`filter_${i}`).style.visibility = "hidden";
+    document.getElementById(`filter_${filterNb}`).style.visibility = "visible";
+}  
   
