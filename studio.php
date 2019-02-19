@@ -1,5 +1,4 @@
 <?php
-
 // CONEXION A LA BDD
 include('libphp/cnct_bdd.php');
 session_start();
@@ -9,9 +8,6 @@ include('libphp/usr_nav.php');
 // IF NOT LOG REDIRECT
 if (!islog())
     header('Location: ../index.php');
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +31,6 @@ if (!islog())
 
 </head>
 <body>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script async src="js/animation.js"></script>
     <script async src="js/webcam.js"></script>
 
@@ -69,24 +64,24 @@ if (!islog())
     </nav>
 
     <!-- STUDIO -->
-    <!-- <input type="file" accept="image/*;capture=camera"> -->
-
     <section id="sect">
         <h1>Studio<span> Camagru</span></h1>
         <div class="middle">
                 <div id="webcam">
-                    <video autoplay></video>
-                                         
+
+                    <div id="filter_img">
+                        <img id="filter_0" src="data/filter_0.jpg" alt="">
+                        <video autoplay></video>
+                    </div>
+
+                    <!-- input radio -->
                      <form id="button-option" method="POST" action="">
-                        
                         <input id="screenshot" type="button" value="Take A Picture">
                         <input type="button" value="Filter 1">
                         <input type="button" value="Filter 2">
                         <input type="button" value="Filter 3">
                         <input type="button" value="Filter 4">
                      </form>
-                    
-                    <img id="img" alt="">
                 </div>
 
                 <div id="post-list">
@@ -204,8 +199,6 @@ if (!islog())
                     </div>
                 </div>
         </div>
-
-
     </section>
 
     <footer id="footer">

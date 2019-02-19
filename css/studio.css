@@ -46,6 +46,7 @@ section div.middle div#webcam{
     width: 63vw;
     max-width: 80em;
     min-width: 24em;
+    position: relative;
 }
 
 section div.middle div#webcam video{
@@ -79,3 +80,17 @@ section div.middle div#webcam form#button-option input[type="button"]:nth-child(
     background-color: #38445b;
 }
 
+/*****************************************************************
+	FILTER
+*****************************************************************/
+section div.middle div#webcam div#filter_img{
+    position: relative;
+    width: 100%;
+}
+
+section div.middle div#webcam div#filter_img img:nth-child(1){
+    position: absolute;
+    width: 40%;
+    top: 33px;
+    left: 47px;
+}
