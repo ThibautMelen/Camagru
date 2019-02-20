@@ -83,8 +83,8 @@ if (!islog())
                         <input onclick="showHideFilter(1)" type="button" value="Filter 2">
                         <input onclick="showHideFilter(2)" type="button" value="Filter 3">
                         <input onclick="showHideFilter(3)" type="button" value="Filter 4">
-                        <!-- <input type="range" name="points" min="0" max="10"> -->
-                        <!-- <input type="range" name="points" min="0" max="10"> -->
+                        <input id="filterRangeX" type="range" name="points" min="0" max="939" value="470">
+                        <input id="filterRangeY" type="range" name="points" min="0" max="379" value="190">
 
                     </form>
                 </div>

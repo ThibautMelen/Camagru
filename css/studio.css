@@ -90,9 +90,9 @@ section div.middle div#webcam div#filter_img{
 
 section div.middle div#webcam div#filter_img img{
     position: absolute;
-    width: 30.5%;
-    bottom: 0%;
-    right: 0%;
+    width: 27%;
+    bottom: 26%;
+    right: 37%;
     margin-bottom: 0.5%;
     visibility: hidden;
 }

@@ -15,8 +15,13 @@ $imgData = imagecreatefromstring($imgData);
 $filter = intval(htmlspecialchars($_POST['filter']));
 $filerImg = imagecreatefrompng('../data/filter/filter_' . $filter . '.png');
 
-$margin_right = 0;
-$margin_bottom = 0;
+//GET POST JS filterRange X/Y
+$filterRangeX =  intval(htmlspecialchars($_POST['filterRangeX']));
+$filterRangeY =  intval(htmlspecialchars($_POST['filterRangeY']));
+
+
+$margin_right = $filterRangeX; //939 max | 470 mid
+$margin_bottom = $filterRangeY; //379 max | 190 mid
 
 //coordonnées du point de destination.
 $dst_x = imagesx($imgData) - imagesx($filerImg) - $margin_right;
