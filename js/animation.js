@@ -69,13 +69,3 @@
     });
 });
 
-
-//FILTER
-// close menu
-const showHideFilter = (filterNb) => {
-    console.log(filterNb);
-    for (let i = 0; i < 4; i++)
-        document.getElementById(`filter_${i}`).style.visibility = "hidden";
-    document.getElementById(`filter_${filterNb}`).style.visibility = "visible";
-}  
-  

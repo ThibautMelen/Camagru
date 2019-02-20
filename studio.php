@@ -77,14 +77,16 @@ if (!islog())
                         <video autoplay></video>
                     </div>
 
-                    <!-- input radio -->
-                     <form id="button-option" method="POST" action="">
+                    <form id="button-option" method="POST" action="">
                         <input id="screenshot" type="button" value="Take A Picture">
                         <input onclick="showHideFilter(0)" type="button" value="Filter 1">
                         <input onclick="showHideFilter(1)" type="button" value="Filter 2">
                         <input onclick="showHideFilter(2)" type="button" value="Filter 3">
                         <input onclick="showHideFilter(3)" type="button" value="Filter 4">
-                     </form>
+                        <!-- <input type="range" name="points" min="0" max="10"> -->
+                        <!-- <input type="range" name="points" min="0" max="10"> -->
+
+                    </form>
                 </div>
 
                 <div id="post-list">

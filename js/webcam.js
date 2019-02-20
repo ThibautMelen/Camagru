@@ -1,4 +1,5 @@
 let webcamScreen;
+let filterSend = 0;
 const video = document.querySelector('video');
 const screenshotButton = document.querySelector('#screenshot');
 const canvas = document.createElement('canvas');
@@ -43,9 +44,17 @@ screenshotButton.onclick = video.onclick = () => {
   
   req.open('POST', 'libphp/add_post.php', true);
   req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  req.send('img=' + webcamScreen);
-
+  req.send('img=' + webcamScreen + "&filter=" + filterSend);
 };
 
+
+//FILTER
+// close menu
+const showHideFilter = (filterNb) => {
+  filterSend = filterNb;
+  for (let i = 0; i < 4; i++)
+      document.getElementById(`filter_${i}`).style.visibility = "hidden";
+  document.getElementById(`filter_${filterNb}`).style.visibility = "visible";
+}  
 
 window.addEventListener('load', startWebcam(), false);

@@ -63,7 +63,7 @@ section div.middle div#webcam form#button-option{
     overflow-x: auto;
 }
 
-section div.middle div#webcam form#button-option input[type="button"]{
+section div.middle div#webcam form#button-option input{
     color: white;
     cursor: pointer;
     background-color: #01a3a4;
@@ -90,9 +90,10 @@ section div.middle div#webcam div#filter_img{
 
 section div.middle div#webcam div#filter_img img{
     position: absolute;
-    width: 25%;
-    top: 33px;
-    left: 47px;
+    width: 30.5%;
+    bottom: 0%;
+    right: 0%;
+    margin-bottom: 0.5%;
     visibility: hidden;
 }
 section div.middle div#webcam div#filter_img img:nth-child(1){
