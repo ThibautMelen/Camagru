@@ -28,7 +28,7 @@ if (isset($_POST['register_submit'])) {
                     $reqmail->execute(array($register_email));
                     if($reqmail->rowCount() == 0) {
                         $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar) VALUES(?, ?, ?, ?)");
-                        $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "default.jpg"));
+                        $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg"));
                         $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
                     }
                     else 

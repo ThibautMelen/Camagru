@@ -32,7 +32,7 @@ section div.middle div#post-list  {
 /********* POST *********/
 section div.middle div.post {
     width: 22em;
-    height: 29.7em;
+    height: 26.4em;
 }
 
 /*****************************************************************
@@ -59,7 +59,7 @@ section div.middle div#webcam form#button-option{
     flex-wrap: nowrap;
     justify-content: flex-start;
     width: 100%;
-    padding: 1em 0;
+    padding: 1.2em 0;
     overflow-x: auto;
 }
 
@@ -79,6 +79,20 @@ section div.middle div#webcam form#button-option input{
 section div.middle div#webcam form#button-option input[type="button"]:nth-child(1){
     background-color: #38445b;
 }
+
+section div.middle div#webcam form#button-option input#filterRangeX{
+    transform: rotate(180deg);
+    background-color: #38445b;
+   
+}
+section div.middle div#webcam form#button-option input#filterRangeY{
+    transform: rotate(-90deg);
+    margin-left: -3em;
+    background-color: #38445b;
+}
+
+
+
 
 /*****************************************************************
 	FILTER

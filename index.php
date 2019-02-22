@@ -68,7 +68,7 @@ include('libphp/usr_nav.php');
             <div class="post">
 
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -123,7 +123,7 @@ include('libphp/usr_nav.php');
 
             <div class="post">
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -168,7 +168,7 @@ include('libphp/usr_nav.php');
 
             <div class="post">
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -213,7 +213,7 @@ include('libphp/usr_nav.php');
 
             <div class="post">
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -259,7 +259,7 @@ include('libphp/usr_nav.php');
             <div class="post">
 
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -314,7 +314,7 @@ include('libphp/usr_nav.php');
 
             <div class="post">
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -359,7 +359,7 @@ include('libphp/usr_nav.php');
 
             <div class="post">
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">
@@ -404,7 +404,7 @@ include('libphp/usr_nav.php');
 
             <div class="post">
                 <figure>
-                    <img src="https://assets.awwwards.com/awards/images/2019/01/introduction-1.jpg" alt="">
+                    <img src="data/post/post_22_1550857803.png" alt="">
                 </figure>
 
                 <div class="post-user">

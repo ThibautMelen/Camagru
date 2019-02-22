@@ -48,13 +48,13 @@ if (isset($_POST['change_submit']))
             $uploadExtension = strtolower(substr(strrchr($_FILES['change_avatar']['name'], '.'), 1));
             if(in_array($uploadExtension, $validExtension))
             {
-                $path = "avatar_member/".$_SESSION['id'].".".$uploadExtension;
+                $path = "data/avatar_member/".$_SESSION['id'].".".$uploadExtension;
                 $fileEnd = move_uploaded_file($_FILES['change_avatar']['tmp_name'], $path);
                 if($fileEnd)
                 {
                     $updateAvatar = $bdd->prepare('UPDATE member SET avatar = ? WHERE id = ?');
-                    $updateAvatar->execute(array($_SESSION['id'].".".$uploadExtension, $_SESSION['id']));
-                    $_SESSION['avatar'] = $_SESSION['id'].".".$uploadExtension;
+                    $updateAvatar->execute(array($path, $_SESSION['id']));
+                    $_SESSION['avatar'] = $path;
                     header('Location: profile.php?user='.$_SESSION['pseudo']);
                 }else
                     $settings_error = "Erreur durant l'importation de votre photo de profil";

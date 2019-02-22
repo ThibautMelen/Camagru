@@ -6,7 +6,7 @@ $usr_nav = islog()
 ? 
 '<div class="account">
 <p>' .  $_SESSION['pseudo'] . '</p>
-<img src="avatar_member/' . $_SESSION['avatar'] . '" alt="avatar">
+<img src="' . $_SESSION['avatar'] . '" alt="avatar">
 <ul>
     <a href="profile.php?user=' . $_SESSION['pseudo'] . '"><li>Profile</li></a>
     <a href="settings.php"><li>Settings</li></a>

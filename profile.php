@@ -78,7 +78,7 @@ else
     <section id="sect">
     
         <header>
-            <img src="avatar_member/<?php   echo $_SESSION['avatar'];  ?>" alt="avatar">
+            <img src="<?php   echo $_SESSION['avatar'];  ?>" alt="avatar">
             <p><?php   echo $profile_pseudo;  ?></p>
             
             <!-- IF IS MY PROFILE -->

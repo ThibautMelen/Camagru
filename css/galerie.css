@@ -34,6 +34,7 @@ div.post {
     flex-direction: row;
     flex-wrap: wrap;
     width: 26em;
+    height: 28.8em;
     margin: 1em;
     background: #fff;
     border-radius: .4em;

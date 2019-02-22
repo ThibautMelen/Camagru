@@ -13,8 +13,6 @@ const constraints = {
 let filterRangeX = document.getElementById("filterRangeX").value;
 let filterRangeY = document.getElementById("filterRangeY").value;
 
-console.log(`${filterRangeX} ${filterRangeY}`);
-
 const handleSuccess = (stream) => {
   screenshotButton.disabled = false;
   video.srcObject = stream;
@@ -51,8 +49,13 @@ screenshotButton.onclick = video.onclick = () => {
   req.open('POST', 'libphp/add_post.php', true);
   req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
-};
 
+
+  setTimeout(function () {
+    location.reload();
+
+}, 20);
+};
 
 //FILTER CSS
 const showHideFilter = (filterNb) => {
@@ -62,12 +65,16 @@ const showHideFilter = (filterNb) => {
   document.getElementById(`filter_${filterNb}`).style.visibility = "visible";
 }  
 
-
-
-
-
-
-
-
+//FILTER RANGE
+const showValRangeX = (newVal) => {
+  document.getElementById("filterRangeX").innerHTML = newVal;
+  for (let i = 0; i < 4; i++)
+    document.getElementById(`filter_${i}`).style.right = `${newVal * (73 / 939)}%`;
+}
+const showValRangeY = (newVal) => {
+  document.getElementById("filterRangeY").innerHTML = newVal;
+  for (let i = 0; i < 4; i++)
+    document.getElementById(`filter_${i}`).style.bottom = `${newVal * (51 / 379)}%`;
+}
 
 window.addEventListener('load', startWebcam(), false);
