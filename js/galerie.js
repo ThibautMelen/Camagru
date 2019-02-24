@@ -1,5 +1,8 @@
+// https://www.codexworld.com/load-more-data-using-jquery-ajax-php-from-database/
+
 const loadmoreButton = document.querySelector('#load-more');
 const req = new XMLHttpRequest();
+
 
 loadmoreButton.onclick = () => {
     req.onreadystatechange = function(event) {
@@ -11,7 +14,7 @@ loadmoreButton.onclick = () => {
             }
         }
     };
-    
+
     req.open('POST', 'libphp/add_post.php', true);
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
