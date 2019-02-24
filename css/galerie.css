@@ -195,7 +195,7 @@ div.actuel-page {
     width: 100vw;
 }
 
-div.actuel-page a, div.actuel-page p {
+div.actuel-page a, div.actuel-page p#load-more {
     background-color: #fff;
     padding: 1.5em 3.5em;
     font-size: .9em;

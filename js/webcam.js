@@ -50,11 +50,10 @@ screenshotButton.onclick = video.onclick = () => {
   req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
 
-
   setTimeout(function () {
     location.reload();
 
-}, 20);
+}, 42);
 };
 
 //FILTER CSS
