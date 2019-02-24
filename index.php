@@ -28,9 +28,21 @@ include('libphp/usr_nav.php');
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
 </head>
 <body>
+    <!-- 
+     -->
+    <!-- DELETE -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- 
+     -->
+    <script>
+
+    </script>
     <script async src="js/animation.js"></script>
     <script async src="js/galerie.js"></script>
-    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+
+
+
 
 
     <!-- GLOBAL ELEMENT -->
@@ -69,11 +81,24 @@ include('libphp/usr_nav.php');
         <div id="post-list">
 <?php
 
+
+
+
 //REFRESH TO SHOW LAST POST
-$addDomPost = $bdd->prepare('SELECT pseudo, avatar, picture, like_nb, post.id FROM member INNER JOIN post ON member.id = post.member_id ORDER BY `post`.`id` DESC LIMIT 12');
+$addDomPost = $bdd->prepare('SELECT `pseudo`, `avatar`, `picture`, `like_nb`, `post`.`id` FROM `member` INNER JOIN `post` ON `member`.`id` = `post`.`member_id` ORDER BY `post`.`id` DESC LIMIT 12');
 $addDomPost->execute();
+
+$nbPost = $addDomPost->rowCount();
+
+$nbPost = 8;
+
+// echo $nbPost;
+
+if($addDomPost->rowCount() > 0)
+{
 while ($dataPost = $addDomPost->fetch())
 {
+
 echo '
 <div class="post">
 
@@ -94,7 +119,7 @@ echo '
             <title>Create a Comment ! 👌</title>
             <path d="M252.5,2.5C116,2.5,5.4,113,5.23,249.47h0V484.53h0A18.17,18.17,0,0,0,30,501.26h0l42.55-16a147.19,147.19,0,0,1,97.6-2.21v0A246.91,246.91,0,0,0,252.5,497c136.56,0,247.27-110.71,247.27-247.27S389.06,2.5,252.5,2.5Z" transform="translate(-5.23 -2.5)"></path>
         </svg>
-        <p>1</p>
+        <p>' . $dataPost['id'] . '</p>
     </div>
     <div id="like_post">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455.2 500" class="hvr-up" style="fill: rgb(173, 180, 185);">
@@ -133,7 +158,7 @@ echo '
 
     ';
 }
-
+}
 
 ?>
             <div class="actuel-page">

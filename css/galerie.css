@@ -70,7 +70,7 @@ div.post div.post-user h3 {
 /********* POST ACTION *********/
 div.post div.post-action {
     padding: 0em 1.5em 1em 1.5em;
-    width: 26em;
+    width: 100%;
     display: inline-flex;
     justify-content: flex-end;
 }
@@ -92,7 +92,7 @@ div.post div.post-action p {
 
 /********* LIST COMMENT *********/
 div.post div#list-comment {
-    width: 26em;
+    width: 100%;
     padding: 0.4em 1.5em;
 
     border-top: 2px solid #adb4b926;

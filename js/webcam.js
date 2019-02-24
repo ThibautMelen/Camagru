@@ -1,7 +1,7 @@
 let webcamScreen;
 let filterSend = 0;
 const video = document.querySelector('video');
-const screenshotButton = document.querySelector('#screenshot');
+const screenshotButton = document.getElementById('screenshot');
 const canvas = document.createElement('canvas');
 const req = new XMLHttpRequest();
 const constraints = {
@@ -28,7 +28,7 @@ const startWebcam = () => {
   .catch(handleError);
 };
 
-screenshotButton.onclick = video.onclick = () => {
+screenshotButton.onclick = () => {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   canvas.getContext('2d').drawImage(video, 0, 0);

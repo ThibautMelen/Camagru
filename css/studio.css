@@ -26,13 +26,24 @@ section div.middle div#post-list  {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: flex-start;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 75vh;
+
+    margin-top: 1em;
+
 }
 
 /********* POST *********/
 section div.middle div.post {
     width: 22em;
     height: 26.4em;
+    display: block;
+}
+section div.middle div.post:nth-child(1) {
+    margin-top: 0;
 }
 
 /*****************************************************************

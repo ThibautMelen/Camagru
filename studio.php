@@ -92,7 +92,7 @@ if (!islog())
                 <?php
 
                 //REFRESH TO SHOW LAST POST
-                $addDomPost = $bdd->prepare('SELECT pseudo, avatar, picture, like_nb FROM member INNER JOIN post ON member.id = post.member_id WHERE member.id = ? ORDER BY post.id DESC LIMIT 5');
+                $addDomPost = $bdd->prepare('SELECT pseudo, avatar, picture, like_nb FROM member INNER JOIN post ON member.id = post.member_id WHERE member.id = ? ORDER BY post.id DESC LIMIT 10');
                 $addDomPost->execute(array($_SESSION['id']));
 
                 while ($dataPost = $addDomPost->fetch())
