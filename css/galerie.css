@@ -195,7 +195,7 @@ div.actuel-page {
     width: 100vw;
 }
 
-div.actuel-page a, div.actuel-page p#load-more {
+div.actuel-page button#load-more {
     background-color: #fff;
     padding: 1.5em 3.5em;
     font-size: .9em;
@@ -204,4 +204,5 @@ div.actuel-page a, div.actuel-page p#load-more {
     font-weight: 500;
     margin: 1em;
     color: #adb4b9;
+    cursor: pointer;
 }

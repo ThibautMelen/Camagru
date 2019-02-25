@@ -48,7 +48,6 @@ if (isset($_POST['register_submit'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
