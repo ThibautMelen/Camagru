@@ -27,15 +27,9 @@ include('libphp/usr_nav.php');
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
 </head>
 <body>
-    <!-- 
-     -->
-    <!-- DELETE -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- 
-     -->
-
     <script async src="js/animation.js"></script>
     <script async src="js/galerie.js"></script>
+    <script async src="js/actionPost.js"></script>
     
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>
@@ -74,9 +68,9 @@ include('libphp/usr_nav.php');
 
         </div>
 
-        <div class="actuel-page">
+        <!-- <div class="actuel-page">
             <button id="load-more">load more</button>
-        </div>
+        </div> -->
     </section>
 
     <footer id="footer">

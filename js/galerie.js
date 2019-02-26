@@ -1,10 +1,10 @@
 const loadmoreButton = document.getElementById('load-more');
 const postlistDiv = document.getElementById('post-list');
-let nbPost = 8;
+let nbPost = 12;
 
 const loadmore = () => {
     const req = new XMLHttpRequest();
-    req.onreadystatechange = function(event) {
+    req.onreadystatechange = function (event) {
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.status === 200) {
                 postlistDiv.innerHTML = this.responseText;
@@ -17,14 +17,13 @@ const loadmore = () => {
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send('nbPost=' + nbPost);
     console.log(nbPost);
-    nbPost += 8;
+    nbPost += 4;
 }
 
-loadmoreButton.onclick = () => {
-    console.log(`BIM !`);
-    loadmore();
-};
-
-// let bottomOfWindow = ( document.documentElement.scrollTop + 200 ) + window.innerHeight >= document.documentElement.offsetHeight;
+window.onscroll = () => {
+    if(document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - 200)
+        loadmore();
+}
 
 window.addEventListener('load', loadmore(), false);
+
