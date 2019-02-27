@@ -74,12 +74,15 @@ if (!islog())
                     <img id="filter_1" src="data/filter/filter_1.png" alt="filter 1">
                     <img id="filter_2" src="data/filter/filter_2.png" alt="filter 2">
                     <img id="filter_3" src="data/filter/filter_3.png" alt="filter 3">
+                    <img src="data/post/post_29_1551273897.png" id="webcamPreview" alt="webcamPreview">
                     <video autoplay></video>
                 </div>
 
                 <form id="button-option" method="POST" action="">
+                    <input id="publish" type="button" value="Publish">
                     <input id="screenshot" type="button" value="Take A Picture">
-                    <input id="pictureInput" type="file">
+                    <input id="cancel" type="button" value="X">
+                    <input id="uploadImg" type="file">
                     <input onclick="showHideFilter(0)" type="button" value="F1">
                     <input onclick="showHideFilter(1)" type="button" value="F2">
                     <input onclick="showHideFilter(2)" type="button" value="F3">

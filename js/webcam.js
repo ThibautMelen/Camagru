@@ -2,8 +2,11 @@ https://stackoverflow.com/questions/5527296/how-can-i-detect-scroll-end-of-the-s
 var webcamScreen;
 let filterSend = 0;
 const video = document.querySelector('video');
+const publishButton = document.getElementById('publish');
+const cancelButton = document.getElementById('cancel');
 const screenshotButton = document.getElementById('screenshot');
-const pictureInput = document.getElementById('pictureInput');
+const uploadImg = document.getElementById('uploadImg');
+const webcamPreview = document.getElementById('webcamPreview');
 const canvas = document.createElement('canvas');
 const req = new XMLHttpRequest();
 const constraints = {
@@ -36,46 +39,100 @@ screenshotButton.onclick = () => {
   canvas.height = video.videoHeight;
   canvas.getContext('2d').drawImage(video, 0, 0);
   webcamScreen = canvas.toDataURL('image/png');
-  req.onreadystatechange = function(event) {
-      if (this.readyState === XMLHttpRequest.DONE) {
-          if (this.status === 200) {
-              console.log("Réponse reçue: %s", this.responseText);
-              loadmore();
-          } else {
-              console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
-          }
-      }
+  webcamPreview.src = webcamScreen;
+  webcamPreview.style.visibility = "visible";
+};
+
+cancelButton.onclick = () => {
+    webcamPreview.style.visibility = "hidden";
+    webcamPreview.style.visibility = "hidden";
   };
   
-  filterRangeX = document.getElementById("filterRangeX").value;
-  filterRangeY = document.getElementById("filterRangeY").value;
-  
-  req.open('POST', 'libphp/add_post.php', true);
-  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
-};
+
+function isValidImage(picInput) {
+    let filePath = picInput.value;
+    let allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    return (allowedExtensions.exec(filePath));
+}
 
 
 // Preview of uploaded pic
-pictureInput.onchange = pictureInput.onload = () => {
-  console.log(`prout`);
-  // if (!isValidImage(pictureInput)) {
-  //     pictureInput.value = "";
-  //     alert("JPG ou PNG uniquement.");
-  // } 
-  // else {
-      var imageObj = new Image();
+uploadImg.onchange = uploadImg.onload = () => {
+console.log(`Upload image...`);
+  if (!isValidImage(uploadImg)) {
+      uploadImg.value = "";
+      alert("JPG ou PNG uniquement.");
+  } 
+  else {
+    webcamPreview.style.visibility = "visible";
+      var imgObj = new Image();
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      imageObj.onload = () => {
-          let sSize = Math.min(imageObj.width, imageObj.height);
-          canvas.getContext('2d').drawImage(imageObj, (imageObj.width - sSize) / 2, (imageObj.height - sSize) / 2, sSize, sSize, 0, 0, canvas.width, canvas.height);
-          img.src = canvas.toDataURL('image/png');
+      imgObj.onload = () => {
+          let angleMin = Math.min(imgObj.width, imgObj.height);
+
+
+        if(imgObj.height >= imgObj.width)
+        {
+            let ratio = imgObj.height / imgObj.width;
+            canvas.getContext('2d').drawImage(imgObj,
+                //CE QU'ON PETA !!!!!!!
+                0, 0, imgObj.width, imgObj.height,
+                //ON METS CA OU ??????
+                0, (canvas.height / 2) - ((canvas.width * ratio) / 2),
+                canvas.width, canvas.width * ratio);
+        }
+        else
+        {
+            // canvas.getContext('2d').drawImage(imgObj,
+            //     //CE QU'ON PETA !!!!!!!
+            //     (imgObj.width / 2) - (canvas.width / 2), //ce qu'on prend de l'image X
+            //     0, //ce qu'on prend de l'image Y 
+            //     imgObj.width, imgObj.height, //on met tout ca ou
+            //     //ON METS CA OU ??????
+            //     0, 0, imgObj.width, canvas.height );
+
+            let ratio = imgObj.width / imgObj.height;
+            canvas.getContext('2d').drawImage(imgObj,
+                //CE QU'ON PETA !!!!!!!
+                0, 0, imgObj.width, imgObj.height,
+                //ON METS CA OU ??????
+                (canvas.width / 2) - ((canvas.height * ratio) / 2), 0,
+                canvas.height, canvas.height * ratio);
+        }
+
+
+
+
+          webcamScreen = canvas.toDataURL('image/png');
+          webcamPreview.src = webcamScreen;
+          webcamPreview.style.visibility = "visible";
       }
-      imageObj.src = window.URL.createObjectURL(pictureInput.files[0]);
-  // }
-  // enableButton();
+      imgObj.src = window.URL.createObjectURL(uploadImg.files[0]);
+  }
+//   enableButton();
 }
+
+// SEND PREVIEW TO BDD
+publishButton.onclick = () => {
+    req.onreadystatechange = function(event) {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            if (this.status === 200) {
+                console.log("Réponse reçue: %s", this.responseText);
+                loadmore();
+            } else {
+                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+            }
+        }
+    };
+    filterRangeX = document.getElementById("filterRangeX").value;
+    filterRangeY = document.getElementById("filterRangeY").value;
+    req.open('POST', 'libphp/add_post.php', true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
+}  
+
+
 
 //////////
 ///////////////

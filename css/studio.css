@@ -49,6 +49,7 @@ section div.middle div.post:nth-child(1) {
 /*****************************************************************
 	MIDDLE WEBCAM
 *****************************************************************/
+/* WEBCAM */
 section div.middle div#webcam{
     display: flex;
     flex-direction: column;
@@ -63,7 +64,6 @@ section div.middle div#webcam{
 section div.middle div#webcam video{
     width: 100%;
 }
-
 
 /* BUTTON */
 section div.middle div#webcam form#button-option{
@@ -90,7 +90,7 @@ section div.middle div#webcam form#button-option input{
     padding: 1em;
 }
 
-section div.middle div#webcam form#button-option input[type="button"]:nth-child(1){
+section div.middle div#webcam form#button-option input:nth-child(-n+4){
     background-color: #38445b;
 }
 
@@ -106,6 +106,20 @@ section div.middle div#webcam form#button-option input#filterRangeY{
 }
 
 /*****************************************************************
+	PREVIEW WEBCAM IMG
+*****************************************************************/
+section div.middle div#webcam img#webcamPreview{
+    width: 100%;
+    height: 99.5%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    visibility: hidden;
+    margin-bottom: 0.3%;
+    z-index: 1;
+}
+
+/*****************************************************************
 	FILTER
 *****************************************************************/
 section div.middle div#webcam div#filter_img{
@@ -113,13 +127,14 @@ section div.middle div#webcam div#filter_img{
     width: 100%;
 }
 
-section div.middle div#webcam div#filter_img img{
+section div.middle div#webcam div#filter_img img:not(:nth-last-child(2)){
     position: absolute;
     width: 27%;
     bottom: 26%;
     right: 37%;
     margin-bottom: 0.5%;
     visibility: hidden;
+    z-index: 2;
 }
 section div.middle div#webcam div#filter_img img:nth-child(1){
     visibility: visible;
@@ -131,7 +146,6 @@ input[type="file"] {
     padding: 0;
     margin-bottom: 0;
     width: 4.2em;
-    background-color: #37425c!important;
 }
 input[type="file"]::-webkit-file-upload-button {
     visibility: hidden;
@@ -143,3 +157,5 @@ input[type="file"]::before {
     white-space: nowrap;
     -webkit-user-select: none;
 }
+
+
