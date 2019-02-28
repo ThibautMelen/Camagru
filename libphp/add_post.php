@@ -41,5 +41,4 @@ imagedestroy($imgData);
 $insertPost = $bdd->prepare("INSERT INTO post(member_id, picture, like_nb) VALUES(?, ?, ?)");
 $insertPost->execute(array($_SESSION['id'], $pathPicture, 0));
 
-
 ?>

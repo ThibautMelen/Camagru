@@ -11,7 +11,7 @@ $nbPost =  intval(htmlspecialchars($_POST['nbPost']));
 // if (islog())
 
 //GET DATA POST IN BDD
-$addDomPost = $bdd->prepare('SELECT pseudo, avatar, picture, like_nb FROM member INNER JOIN post ON member.id = post.member_id ORDER BY post.id DESC LIMIT '.$nbPost.'');
+$addDomPost = $bdd->prepare('SELECT pseudo, avatar, picture, like_nb, post.id FROM member INNER JOIN post ON member.id = post.member_id ORDER BY post.id DESC LIMIT '.$nbPost.'');
 $addDomPost->execute(array());
 while ($dataPost = $addDomPost->fetch())
 {
@@ -37,8 +37,8 @@ echo '
             </svg>
             <p>1</p>
         </div>
-        <div id=like-post>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455.2 500" class="hvr-up" style="fill: rgb(173, 180, 185);">
+        <div onclick="likePost('.$dataPost['id'].')" >
+            <svg id="post_' . $dataPost['id'] . '" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455.2 500" class="hvr-up" style="fill: rgb(173, 180, 185);">
                 <title>I like that ! 🔥❤</title>
                 <path d="M479.18,298.51a192.92,192.92,0,0,0-73.94-132.8,13.36,13.36,0,0,0-4-2.15c-4-1.73-8.74-1-11.2,4.11a178.73,178.73,0,0,1-47.65,60.6,177.81,177.81,0,0,0,4.89-22.92c1.14-8,1.53-16.28,2.08-24.19.25-3.48.51-7.95-.36-11.7C345.29,98,301.6,33.83,236.7,3.65c-7-3.27-13.76.73-14.55,8.34a171.11,171.11,0,0,1-38.52,91.46,178.34,178.34,0,0,1-36.18,33.05c-5.31,3.63-10.89,6.73-16.46,9.92-2.75,1.56-6.29,3.11-9.1,5.24a198.17,198.17,0,0,0-70.64,69.83C34.5,249.87,23.68,284.87,25,318.1c0,.09,0,.18,0,.28.07,2.08.15,4.16.22,6.25a10.62,10.62,0,0,0,.23,1.89,194.31,194.31,0,0,0,90.09,153.34,201.23,201.23,0,0,0,49.15,22.29c6.56,2,14.59-4.93,11.89-11.89a173.69,173.69,0,0,1-.07-126.59,1,1,0,0,1,0-.14c.07-.16.15-.31.22-.48a175,175,0,0,1,16.33-30.62c3.17,38.3,18.35,75.05,42.65,105.14a195.33,195.33,0,0,0,49,43A203,203,0,0,0,315,496.16q7.36,3,15,5.36c6.54,2,11.14.49,17.41-1.65C430.85,471.29,488.15,387.22,479.18,298.51Zm-305,68.67,0,.06,0,0Z" transform="translate(-24.9 -2.5)"></path>
             </svg>

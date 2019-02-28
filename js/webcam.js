@@ -41,13 +41,13 @@ screenshotButton.onclick = () => {
   webcamScreen = canvas.toDataURL('image/png');
   webcamPreview.src = webcamScreen;
   webcamPreview.style.visibility = "visible";
+  publishButton.style.display = "block";
 };
 
 cancelButton.onclick = () => {
     webcamPreview.style.visibility = "hidden";
-    webcamPreview.style.visibility = "hidden";
+    publishButton.style.display = "none";
   };
-  
 
 function isValidImage(picInput) {
     let filePath = picInput.value;
@@ -59,6 +59,7 @@ function isValidImage(picInput) {
 // Preview of uploaded pic
 uploadImg.onchange = uploadImg.onload = () => {
 console.log(`Upload image...`);
+publishButton.style.display = "block";
   if (!isValidImage(uploadImg)) {
       uploadImg.value = "";
       alert("JPG ou PNG uniquement.");
@@ -69,9 +70,6 @@ console.log(`Upload image...`);
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       imgObj.onload = () => {
-          let angleMin = Math.min(imgObj.width, imgObj.height);
-
-
         if(imgObj.height >= imgObj.width)
         {
             let ratio = imgObj.height / imgObj.width;
@@ -84,25 +82,14 @@ console.log(`Upload image...`);
         }
         else
         {
-            // canvas.getContext('2d').drawImage(imgObj,
-            //     //CE QU'ON PETA !!!!!!!
-            //     (imgObj.width / 2) - (canvas.width / 2), //ce qu'on prend de l'image X
-            //     0, //ce qu'on prend de l'image Y 
-            //     imgObj.width, imgObj.height, //on met tout ca ou
-            //     //ON METS CA OU ??????
-            //     0, 0, imgObj.width, canvas.height );
-
-            let ratio = imgObj.width / imgObj.height;
-            canvas.getContext('2d').drawImage(imgObj,
-                //CE QU'ON PETA !!!!!!!
-                0, 0, imgObj.width, imgObj.height,
-                //ON METS CA OU ??????
-                (canvas.width / 2) - ((canvas.height * ratio) / 2), 0,
-                canvas.height, canvas.height * ratio);
+          let ratio = 1;
+          canvas.getContext('2d').drawImage(imgObj,
+              //CE QU'ON PETA !!!!!!!
+              0, 0, imgObj.width, imgObj.height,
+              //ON METS CA OU ??????
+              0, 0,
+              canvas.width * ratio, canvas.height);
         }
-
-
-
 
           webcamScreen = canvas.toDataURL('image/png');
           webcamPreview.src = webcamScreen;
@@ -110,26 +97,27 @@ console.log(`Upload image...`);
       }
       imgObj.src = window.URL.createObjectURL(uploadImg.files[0]);
   }
-//   enableButton();
 }
 
 // SEND PREVIEW TO BDD
 publishButton.onclick = () => {
-    req.onreadystatechange = function(event) {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status === 200) {
-                console.log("Réponse reçue: %s", this.responseText);
-                loadmore();
-            } else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
-            }
-        }
-    };
-    filterRangeX = document.getElementById("filterRangeX").value;
-    filterRangeY = document.getElementById("filterRangeY").value;
-    req.open('POST', 'libphp/add_post.php', true);
-    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
+  publishButton.style.display = "none";
+  webcamPreview.style.visibility = "hidden";
+  req.onreadystatechange = function(event) {
+      if (this.readyState === XMLHttpRequest.DONE) {
+          if (this.status === 200) {
+              console.log("Réponse reçue: %s", this.responseText);
+              loadmore();
+          } else {
+              console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+          }
+      }
+  };
+  filterRangeX = document.getElementById("filterRangeX").value;
+  filterRangeY = document.getElementById("filterRangeY").value;
+  req.open('POST', 'libphp/add_post.php', true);
+  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  req.send('img=' + webcamScreen + "&filter=" + filterSend + "&filterRangeX=" + filterRangeX + "&filterRangeY=" + filterRangeY);
 }  
 
 
@@ -142,7 +130,6 @@ const postlistDiv = document.getElementById('post-list');
 let nbPost = 3;
 
 const loadmore = () => {
-    console.log(`izi`);
     const req = new XMLHttpRequest();
     req.onreadystatechange = function(event) {
         if (this.readyState === XMLHttpRequest.DONE) {
