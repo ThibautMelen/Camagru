@@ -65,12 +65,8 @@ include('libphp/usr_nav.php');
         <h1>Galerie<span> les dernières photos Camagru</span></h1>
         
         <div id="post-list">
-
+            <!-- FLUX POST HERE -->
         </div>
-
-        <!-- <div class="actuel-page">
-            <button id="load-more">load more</button>
-        </div> -->
     </section>
 
     <footer id="footer">
