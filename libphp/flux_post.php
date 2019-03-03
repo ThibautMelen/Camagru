@@ -3,7 +3,6 @@
 include('cnct_bdd.php');
 session_start();
 
-
 //GET POST JS nbPost
 $nbPost =  intval(htmlspecialchars($_POST['nbPost']));
 
@@ -80,15 +79,29 @@ echo '
     </div>
 
     <div id="list-comment">
-        <p><a href=""><strong>John Snow</strong></a>yah but did anyone assume he was gay and basically forced the thought on him when he was straight?</p>
-        <p><a href=""><strong>John Snow</strong></a>yah but did anyone assume he was gay and basically forced the thought on him when he was straight?</p>
+    ';
+
+
+    $addDomPostComment = $bdd->prepare('SELECT pseudo, comment FROM member INNER JOIN comment_post ON member.id = comment_post.member_id WHERE comment_post.post_id = ? LIMIT 10');
+    $addDomPostComment->execute(array($dataPost['id']));
+
+    // $dataPost = "MDRR";
+    
+    while ($dataPostComment = $addDomPostComment->fetch())
+    {
+
+    echo '
+        <p><a href=""><strong>' . $dataPostComment['pseudo'] . '</strong></a>' . $dataPostComment['comment'] . '</p>
+        ';
+        
+    }
+    echo '       
     </div>
 
-    <form class="post-comment" action="">
-        <input id="post-comment" name="post-comment" type="text" placeholder="Add a comment" required="required" maxlength="210">
-        
+    <form class="post-comment" action="libphp/comment_post.php" method="POST">
+        <input id="post_comment" name="post_comment" type="text" placeholder="Add a comment" required="required" maxlength="210">
+        <input type="hidden" id="idPost" name="idPost" value="' . $dataPost['id'] . '">
         '. $delPost . '
-
     </form>
 </div>
 

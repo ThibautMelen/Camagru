@@ -105,7 +105,6 @@ if (isset($_POST['login_submit']))
             }
         ?>
 
-
     </section>
 
     <footer id="footer">
