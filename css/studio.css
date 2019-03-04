@@ -39,11 +39,19 @@ section div.middle div#post-list  {
 /********* POST *********/
 section div.middle div.post {
     width: 22em;
-    height: 26.4em;
+    height: 16.5em;
     display: block;
 }
 section div.middle div.post:nth-child(1) {
     margin-top: 0;
+}
+
+div.post form.post-comment {
+    width: 22em;
+}
+
+div.post div#delete-post {
+    top: -35px;
 }
 
 /*****************************************************************
@@ -139,7 +147,7 @@ section div.middle div#webcam div#filter_img img:not(:nth-last-child(2)){
     visibility: hidden;
     z-index: 2;
 }
-section div.middle div#webcam div#filter_img img:nth-child(1){
+section div.middle div#webcam div#filter_img img:nth-child(2){
     visibility: visible;
 }
 

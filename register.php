@@ -9,6 +9,34 @@ include('libphp/islog.php');
 if (islog())
     header('Location: ../index.php');
 
+// FUNCTION PASSWORD HARD
+function pass_check($pass) {
+	if ( strlen($pass) < 8 )
+		return FALSE;
+    else if ( !preg_match('/[0-9]+/', $pass) )
+        return FALSE;
+    else if ( !preg_match('/[a-z]+/', $pass) )
+        return FALSE;
+    else if ( !preg_match('/[A-Z]+/', $pass) )
+        return FALSE;
+    else if ( !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+!-]/', $pass) )
+        return FALSE;
+	return TRUE;
+}
+
+//RECAPTCHA
+// clé privée
+$secret = "6LcmcJUUAAAAAMP0q_0uqa0J7VirNEIijbxbYYu6";
+// Paramètre renvoyé par le recaptcha
+$response = $_POST['g-recaptcha-response'];
+// On récupère l'IP de l'utilisateur
+$remoteip = $_SERVER['REMOTE_ADDR'];
+$api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
+    . $secret
+    . "&response=" . $response
+    . "&remoteip=" . $remoteip ;
+$decode = json_decode(file_get_contents($api_url), true);
+
 //REGISTER
 if (isset($_POST['register_submit'])) {
     $register_pseudo = htmlspecialchars($_POST['register_pseudo']);
@@ -16,32 +44,40 @@ if (isset($_POST['register_submit'])) {
     $register_password = sha1($_POST['register_password']);
     if(!empty($_POST['register_pseudo']) AND !empty($_POST['register_email']) AND !empty($_POST['register_password']))
     {
-        if(strlen($register_pseudo) <= 255 )
-        {
-            $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
-            $reqpseudo->execute(array($register_pseudo));
-            if($reqpseudo->rowCount() == 0)
+        if ($decode['success'] == true) {
+            if(pass_check($_POST['register_password']))
             {
-                if(filter_var($register_email, FILTER_VALIDATE_EMAIL))
+                if(strlen($register_pseudo) <= 255 )
                 {
-                    $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
-                    $reqmail->execute(array($register_email));
-                    if($reqmail->rowCount() == 0) {
-                        $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar) VALUES(?, ?, ?, ?)");
-                        $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg"));
-                        $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
+                    $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+                    $reqpseudo->execute(array($register_pseudo));
+                    if($reqpseudo->rowCount() == 0)
+                    {
+                        if(filter_var($register_email, FILTER_VALIDATE_EMAIL))
+                        {
+                            $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
+                            $reqmail->execute(array($register_email));
+                            if($reqmail->rowCount() == 0) {
+                                $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar, notif) VALUES(?, ?, ?, ?, ?)");
+                                $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg", 1));
+                                $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
+                            }
+                            else 
+                                $register_error = "Adresse mail déjà utilisée !";
+                        }
+                        else
+                            $register_error = "entre un email valide";
                     }
-                    else 
-                        $register_error = "Adresse mail déjà utilisée !";
+                    else
+                        $register_error = "Pseudo déjà utilisée !";
                 }
                 else
-                    $register_error = "entre un email valide";
+                    $register_error = "Pseudo ne doit pas depasser 255 car";
             }
             else
-                $register_error = "Pseudo déjà utilisée !";
-        }
-        else
-            $register_error = "Pseudo ne doit pas depasser 255 car";
+                $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
+        } else
+            $register_error = "Captcha ERROR";
     }
     else
         $register_error = "All fields must be completed in this Section";
@@ -67,6 +103,8 @@ if (isset($_POST['register_submit'])) {
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
 
+    <!-- CAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
     <script async src="js/animation.js"></script>
@@ -100,7 +138,7 @@ if (isset($_POST['register_submit'])) {
             <li id="menu-close"><span>X</span> CLOSE</li>
             <a href="index.php"><li>Galerie</li></a>
             <a href="studio.php"><li>Studio</li></a>
-            <a href=""><li>Partager</li></a>
+            <a href="https://twitter.com/intent/tweet?text=Join Camagru 😋" target="_blank"><li>Partager</li></a>
         </ul>
     </nav>
 
@@ -111,7 +149,8 @@ if (isset($_POST['register_submit'])) {
         <form method="POST" action="">
             <input id="register_pseudo" name="register_pseudo" value="<?php if(isset($register_pseudo)) {echo $register_pseudo;} ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
             <input id="register_email" name="register_email" value="<?php if(isset($register_email)) {echo $register_email;} ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
-            <input id="register_password" name="register_password" type="password" placeholder="Password" required="required">
+            <input id="register_password" name="register_password" type="password" placeholder="Password" required="required" minlength="8">
+            <div class="g-recaptcha" data-sitekey="6LcmcJUUAAAAAErxBXWYChbpIKnzikjM6OGyyQIv"></div>
             <input id="register_submit" name="register_submit" type="submit" value="create my account">
         </form>
 

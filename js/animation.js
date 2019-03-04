@@ -69,3 +69,29 @@
     });
 });
 
+// Wrapper BG by close
+[].forEach.call(document.querySelectorAll('#menu-close'), function(el) {
+    el.addEventListener('click', function() {
+        let divwrapper = document.getElementById('wrapper');
+        if(divwrapper.classList.contains('go-to-right-black'))
+        {
+            document.getElementById("hamburger").classList.remove("open");
+
+            document.getElementById("wrapper").classList.remove("go-to-right-black");
+            document.getElementById("wrapper").classList.add("go-to-left-no");
+            
+            document.getElementById("nav").classList.remove("fade-in-left");
+            document.getElementById("nav").classList.add("fade-out-left");
+
+            document.getElementById("header").classList.add("go-to-left");
+            document.getElementById("header").classList.remove("go-to-right");
+
+            document.getElementById("footer").classList.add("go-to-left");
+            document.getElementById("footer").classList.remove("go-to-right");
+
+            document.getElementById("sect").classList.add("go-to-left");
+            document.getElementById("sect").classList.remove("go-to-right");    
+        }
+    });
+});
+

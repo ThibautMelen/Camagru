@@ -56,27 +56,3 @@ const delPost = (id) => {
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send('idPost=' + id);
 };
-
-
-//COMMENT POST
-const commentPost = (id) => {
-    const req = new XMLHttpRequest();
-    let postId = document.getElementById(`post_${id}`);
-    req.onreadystatechange = function (event) {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status === 200) {
-                console.log(`Status's good | Response : ${this.responseText}`);
-                if(this.responseText == "yes")
-                    postId.remove();
-                else
-                    alert("No authorized !");
-            }
-            else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
-            }
-        }
-    };
-    req.open('POST', 'libphp/comment_post.php', true);
-    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    req.send('idPost=' + id);
-};

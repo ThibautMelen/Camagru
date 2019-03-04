@@ -30,7 +30,7 @@ section form{
     justify-content: center;
 }
 
-section form input{
+section form input, section form select{
     padding: 2em;
     margin-bottom: 2em;
     letter-spacing: .05em;
@@ -41,6 +41,7 @@ section form input{
     width: 100%;
 }
 section form input[type="submit"]{
+    margin-top: 2em;
     cursor: pointer;
     background-color: #01a3a4;
     color: #fff;
@@ -49,10 +50,19 @@ section form input[type="submit"]{
 /*****************************************************************
 	SETTING FILE
 *****************************************************************/
+section form select {
+    height: 5em;
+}
+
+  
+/*****************************************************************
+	SETTING FILE
+*****************************************************************/
 input[type="file"] {
     color: transparent;
     padding: 0;
     margin-bottom: 0;
+    padding-right: 4em;
 }
 input[type="file"]::-webkit-file-upload-button {
     visibility: hidden;

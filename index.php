@@ -50,20 +50,19 @@ include('libphp/usr_nav.php');
 
         <?php   echo $usr_nav;  ?>
     </header>
-   
     <nav id="nav">
         <ul class="menu">
             <li id="menu-close"><span>X</span> CLOSE</li>
             <a href="index.php"><li class="activepage">Galerie</li></a>
             <a href="studio.php"><li>Studio</li></a>
-            <a href=""><li>Partager</li></a>
+            <a href="https://twitter.com/intent/tweet?text=Join Camagru 😋" target="_blank"><li>Partager</li></a>
         </ul>
     </nav>
 
     <!-- GALERIE -->
     <section id="sect">
         <h1>Galerie<span> les dernières photos Camagru</span></h1>
-        
+    
         <div id="post-list">
             <!-- FLUX POST HERE -->
         </div>

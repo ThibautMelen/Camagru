@@ -7,7 +7,7 @@ include('libphp/usr_nav.php');
 
 // IF NOT LOG REDIRECT
 if (!islog())
-    header('Location: ../index.php');
+    header('Location: ../login.php');
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +33,7 @@ if (!islog())
 <body>
     <script async src="js/animation.js"></script>
     <script async src="js/webcam.js"></script>
+    <script async src="js/actionPost.js"></script>
 
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>
@@ -59,7 +60,7 @@ if (!islog())
             <li id="menu-close"><span>X</span> CLOSE</li>
             <a href="index.php"><li>Galerie</li></a>
             <a href="studio.php"><li class="activepage">Studio</li></a>
-            <a href=""><li>Partager</li></a>
+            <a href="https://twitter.com/intent/tweet?text=Join Camagru 😋" target="_blank"><li>Partager</li></a>
         </ul>
     </nav>
 
@@ -74,6 +75,7 @@ if (!islog())
                     <img id="filter_1" src="data/filter/filter_1.png" alt="filter 1">
                     <img id="filter_2" src="data/filter/filter_2.png" alt="filter 2">
                     <img id="filter_3" src="data/filter/filter_3.png" alt="filter 3">
+                    <img id="filter_4" src="data/filter/filter_4.png" alt="filter 4">
                     <img src="data/post/post_29_1551273897.png" id="webcamPreview" alt="webcamPreview">
                     <video autoplay></video>
                 </div>
@@ -83,10 +85,11 @@ if (!islog())
                     <input id="screenshot" type="button" value="Take A Picture">
                     <input id="cancel" type="button" value="X">
                     <input id="uploadImg" type="file">
-                    <input onclick="showHideFilter(0)" type="button" value="F1">
-                    <input onclick="showHideFilter(1)" type="button" value="F2">
-                    <input onclick="showHideFilter(2)" type="button" value="F3">
-                    <input onclick="showHideFilter(3)" type="button" value="F4">
+                    <input onclick="showHideFilter(0)" type="button" value="F0">
+                    <input onclick="showHideFilter(1)" type="button" value="F1">
+                    <input onclick="showHideFilter(2)" type="button" value="F2">
+                    <input onclick="showHideFilter(3)" type="button" value="F3">
+                    <input onclick="showHideFilter(4)" type="button" value="F4">
                     <input oninput="showValRangeX(this.value)" onchange="showValRangeX(this.value)" id="filterRangeX" type="range" name="points" min="1" max="939" value="470">
                     <input oninput="showValRangeY(this.value)" onchange="showValRangeY(this.value)" id="filterRangeY" type="range" name="points" min="1" max="379" value="190">
                 </form>

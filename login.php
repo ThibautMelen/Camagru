@@ -24,6 +24,7 @@ if (isset($_POST['login_submit']))
             $_SESSION['pseudo'] = $userinfo['pseudo'];
             $_SESSION['email'] = $userinfo['email'];
             $_SESSION['avatar'] = $userinfo['avatar'];
+            $_SESSION['notif'] = $userinfo['notif'];
             header('Location: ../index.php');
         }
         else
@@ -51,7 +52,6 @@ if (isset($_POST['login_submit']))
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
-
 </head>
 <body>
     <script async src="js/animation.js"></script>
@@ -85,7 +85,7 @@ if (isset($_POST['login_submit']))
             <li id="menu-close"><span>X</span> CLOSE</li>
             <a href="index.php"><li>Galerie</li></a>
             <a href="studio.php"><li>Studio</li></a>
-            <a href=""><li>Partager</li></a>
+            <a href="https://twitter.com/intent/tweet?text=Join Camagru 😋" target="_blank"><li>Partager</li></a>
         </ul>
     </nav>
 

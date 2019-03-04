@@ -127,7 +127,7 @@ publishButton.onclick = () => {
 
 //INSERT LAST POST RIGHT
 const postlistDiv = document.getElementById('post-list');
-let nbPost = 3;
+let nbPost = 5;
 
 const loadmore = () => {
     const req = new XMLHttpRequest();
@@ -150,7 +150,7 @@ const loadmore = () => {
 //FILTER CSS
 const showHideFilter = (filterNb) => {
   filterSend = filterNb;
-  for (let i = 0; i < 4; i++)
+  for (let i = 0; i < 5; i++)
       document.getElementById(`filter_${i}`).style.visibility = "hidden";
   document.getElementById(`filter_${filterNb}`).style.visibility = "visible";
 }  
@@ -158,12 +158,12 @@ const showHideFilter = (filterNb) => {
 //FILTER RANGE
 const showValRangeX = (newVal) => {
   document.getElementById("filterRangeX").innerHTML = newVal;
-  for (let i = 0; i < 4; i++)
+  for (let i = 0; i < 5; i++)
     document.getElementById(`filter_${i}`).style.right = `${newVal * (73 / 939)}%`;
 }
 const showValRangeY = (newVal) => {
   document.getElementById("filterRangeY").innerHTML = newVal;
-  for (let i = 0; i < 4; i++)
+  for (let i = 0; i < 5; i++)
     document.getElementById(`filter_${i}`).style.bottom = `${newVal * (51 / 379)}%`;
 }
 

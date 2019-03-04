@@ -39,6 +39,20 @@ if (isset($_POST['change_submit']))
         $_SESSION['email'] = $change_email;
         header('Location: profile.php?user='.$_SESSION['pseudo']);
     }
+    //CHANGE NOTIFICATION PREF
+    if(isset($_POST['change_notif']) && !empty($_POST['change_notif'])) {
+        $change_notif = htmlspecialchars($_POST['change_notif']);
+        $insertemail = $bdd->prepare("UPDATE member SET notif = ? WHERE id = ?");
+        if($change_notif == "notif_true")
+        {
+            $insertemail->execute(array(1, $_SESSION['id']));
+            $_SESSION['notif'] = 1;
+        }
+        else{
+            $insertemail->execute(array(2, $_SESSION['id']));
+            $_SESSION['notif'] = 2;
+        }
+    }
     if(isset($_FILES['change_avatar']) && !empty(($_FILES['change_avatar']['name'])))
     {
         $sizemax = 2097152;
@@ -141,7 +155,7 @@ if (isset($_POST['change_submit']))
             <li id="menu-close"><span>X</span> CLOSE</li>
             <a href="index.php"><li>Galerie</li></a>
             <a href="studio.php"><li>Studio</li></a>
-            <a href=""><li>Partager</li></a>
+            <a href="https://twitter.com/intent/tweet?text=Join Camagru 😋" target="_blank"><li>Partager</li></a>
         </ul>
     </nav>
 
@@ -153,6 +167,10 @@ if (isset($_POST['change_submit']))
             <input id="change_pseudo" name="change_pseudo" type="text" placeholder="Pseudo" maxlength="180" value="<?php echo $userinfo['pseudo']?>">
             <input id="change_email" name="change_email" type="email" placeholder="E-mail" maxlength="180" value="<?php echo $userinfo['email']?>">
             <input id="change_avatar" name="change_avatar" type="file">
+            <select id="change_notif" name="change_notif" >
+                <option value="notif_true" selected>Les notifications par mail sont activée</option> 
+                <option value="notif_false" <?php if($_SESSION['notif'] == 2) echo selected ?>>Les notifications par mail sont désactivée</option>
+            </select>
             <input id="change_old_password" name="change_old_password" type="password" placeholder="Old Password">
             <input id="change_password" name="change_password" type="password" placeholder="New Password">
             <input id="change_submit" name="change_submit" type="submit" value="save">
