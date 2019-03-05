@@ -78,11 +78,10 @@ if (isset($_POST['login_submit']))
             <h2><a class="bim-boom" href="index.php">camagru</a></h2>
         </div>
 
-    <div class="reg-log">
-        <a href="login.php">login</a>
-        <a href="register.php">register</a>
-    </div>
-
+        <div class="reg-log">
+            <a href="login.php">login</a>
+            <a href="register.php">register</a>
+        </div>
     </header>
    
     <nav id="nav">
@@ -94,15 +93,13 @@ if (isset($_POST['login_submit']))
         </ul>
     </nav>
 
-    <!-- GALERIE -->
+    <!-- RESET PASS -->
     <section id="sect">
-        <h1>Login<span> to Camagru</span></h1>
+        <h1>Reset your password</h1>
 
         <form method="POST" action="">
-            <input id="login_pseudo" name="login_pseudo" type="text" placeholder="pseudo" required="required" maxlength="180">
-            <input id="login_password" name="login_password" type="password" placeholder="Password" required="required">
-            <input id="login_submit" name="login_submit" type="submit" value="login">
-            <i><a href="reset.php">Forgot Password ?</a></i>
+            <input id="register_email" name="register_email" type="email" placeholder="E-mail" required="required" maxlength="255">
+            <input id="login_submit" name="login_submit" type="submit" value="send email">
         </form> 
         
         <?php

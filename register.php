@@ -47,56 +47,46 @@ if (isset($_POST['register_submit'])) {
     $register_email = htmlspecialchars($_POST['register_email']);
     $register_password = sha1($_POST['register_password']);
     if (!empty($_POST['register_pseudo']) and !empty($_POST['register_email']) and !empty($_POST['register_password'])) {
-        // if ($decode['success'] == true) {
-        if (pass_check($_POST['register_password'])) {
-            if (strlen($register_pseudo) <= 255) {
-                $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
-                $reqpseudo->execute(array($register_pseudo));
-                if ($reqpseudo->rowCount() == 0) {
-                    if (filter_var($register_email, FILTER_VALIDATE_EMAIL)) {
-                        $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
-                        $reqmail->execute(array($register_email));
-                        if ($reqmail->rowCount() == 0) {
+        if ($decode['success'] == true) {
+            if (pass_check($_POST['register_password'])) {
+                if (strlen($register_pseudo) <= 255) {
+                    $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+                    $reqpseudo->execute(array($register_pseudo));
+                    if ($reqpseudo->rowCount() == 0) {
+                        if (filter_var($register_email, FILTER_VALIDATE_EMAIL)) {
+                            $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
+                            $reqmail->execute(array($register_email));
+                            if ($reqmail->rowCount() == 0) {
 
-                            $key = md5(microtime(true) * 100000);
+                                $key = md5(microtime(true) * 100000);
 
-                            $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar, notif, mail_key, confirm) VALUES(?, ?, ?, ?, ?, ?, ?)");
-                            $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg", 1, $key, 0));
+                                $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar, notif, mail_key, confirm) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                                $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg", 1, $key, 0));
 
-                            // Préparation du mail contenant le lien d'activation
-                            $sujet = "Activer votre compte" ;
-                            $header = "From: no-reply@camagru.com" ;
-                            
-                            // Le lien d'activation est composé du login(log) et de la clé(cle)
-                            $message = 'Bienvenue sur Camagru,
-                            
-                            Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-                            ou copier/coller dans votre navigateur internet.
-                            
-                            http://localhost:8080/confirm_mail.php?log='.urlencode($register_pseudo).'&key='.urlencode($key).'
-                            
-                            
-                            ---------------
-                            Ceci est un mail automatique, Merci de ne pas y répondre.';
+                                $sujet = "Activer votre compte" ;
+                                $header = "From: no-reply@camagru.com" ;
+                                $message = 'Bienvenue sur Camagru,
+                                Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+                                ou copier/coller dans votre navigateur internet.
+                                http://localhost:8080/confirm_mail.php?log='.urlencode($register_pseudo).'&key='.urlencode($key).'
+                                ---------------
+                                Ceci est un mail automatique, Merci de ne pas y répondre.';
                                 
-                            if (mail($register_email, $sujet, $message, $header))
-                                echo "Work work";
-                            else
-                                echo "pas work";
+                                mail($register_email, $sujet, $message, $header);
 
-                            $register_success = "Votre compte a bien été créé. Veuillez confirmer votre adresse e-mail. <a href=\"login.php\">Me connecter</a>";
+                                $register_success = "Votre compte a bien été créé. Veuillez confirmer votre adresse e-mail. <i><a href=\"login.php\">Me connecter</a></i>";
+                            } else
+                                $register_error = "Adresse mail déjà utilisée !";
                         } else
-                            $register_error = "Adresse mail déjà utilisée !";
+                            $register_error = "entre un email valide";
                     } else
-                        $register_error = "entre un email valide";
+                        $register_error = "Pseudo déjà utilisée !";
                 } else
-                    $register_error = "Pseudo déjà utilisée !";
+                    $register_error = "Pseudo ne doit pas depasser 255 car";
             } else
-                $register_error = "Pseudo ne doit pas depasser 255 car";
+                $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
         } else
-            $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
-        // } else
-            // $register_error = "Captcha ERROR";
+            $register_error = "Captcha ERROR";
     } else
         $register_error = "All fields must be completed in this Section";
 }
@@ -168,7 +158,7 @@ if (isset($_POST['register_submit'])) {
             <input id="register_pseudo" name="register_pseudo" value="<?php if (isset($register_pseudo)) { echo $register_pseudo; } ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
             <input id="register_email" name="register_email" value="<?php if (isset($register_email)) { echo $register_email; } ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
             <input id="register_password" name="register_password" type="password" placeholder="Password" required="required" minlength="8">
-            <!-- <div class="g-recaptcha" data-sitekey="6LcmcJUUAAAAAErxBXWYChbpIKnzikjM6OGyyQIv"></div> -->
+            <div class="g-recaptcha" data-sitekey="6LcmcJUUAAAAAErxBXWYChbpIKnzikjM6OGyyQIv"></div>
             <input id="register_submit" name="register_submit" type="submit" value="create my account">
         </form>
 
