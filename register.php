@@ -73,7 +73,7 @@ if (isset($_POST['register_submit'])) {
                             Pour activer votre compte, veuillez cliquer sur le lien ci dessous
                             ou copier/coller dans votre navigateur internet.
                             
-                            http://localhost:8080/login.php?log='.urlencode($login).'&cle='.urlencode($cle).'
+                            http://localhost:8080/confirm_mail.php?log='.urlencode($register_pseudo).'&key='.urlencode($key).'
                             
                             
                             ---------------
@@ -84,7 +84,7 @@ if (isset($_POST['register_submit'])) {
                             else
                                 echo "pas work";
 
-                            $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
+                            $register_success = "Votre compte a bien été créé. Veuillez confirmer votre adresse e-mail. <a href=\"login.php\">Me connecter</a>";
                         } else
                             $register_error = "Adresse mail déjà utilisée !";
                     } else
@@ -165,12 +165,8 @@ if (isset($_POST['register_submit'])) {
         <h1>Register<span> for Camagru Studio</span></h1>
 
         <form method="POST" action="">
-            <input id="register_pseudo" name="register_pseudo" value="<?php if (isset($register_pseudo)) {
-                                                                            echo $register_pseudo;
-                                                                        } ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
-            <input id="register_email" name="register_email" value="<?php if (isset($register_email)) {
-                                                                        echo $register_email;
-                                                                    } ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
+            <input id="register_pseudo" name="register_pseudo" value="<?php if (isset($register_pseudo)) { echo $register_pseudo; } ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
+            <input id="register_email" name="register_email" value="<?php if (isset($register_email)) { echo $register_email; } ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
             <input id="register_password" name="register_password" type="password" placeholder="Password" required="required" minlength="8">
             <!-- <div class="g-recaptcha" data-sitekey="6LcmcJUUAAAAAErxBXWYChbpIKnzikjM6OGyyQIv"></div> -->
             <input id="register_submit" name="register_submit" type="submit" value="create my account">
