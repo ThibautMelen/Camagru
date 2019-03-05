@@ -9,19 +9,23 @@ include('libphp/islog.php');
 if (islog())
     header('Location: ../index.php');
 
+//FUNCTION CONFIRM_MAIL
+include('libphp/confirm_mail.php');
+
 // FUNCTION PASSWORD HARD
-function pass_check($pass) {
-	if ( strlen($pass) < 8 )
-		return FALSE;
-    else if ( !preg_match('/[0-9]+/', $pass) )
-        return FALSE;
-    else if ( !preg_match('/[a-z]+/', $pass) )
-        return FALSE;
-    else if ( !preg_match('/[A-Z]+/', $pass) )
-        return FALSE;
-    else if ( !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+!-]/', $pass) )
-        return FALSE;
-	return TRUE;
+function pass_check($pass)
+{
+    if (strlen($pass) < 8)
+        return false;
+    else if (!preg_match('/[0-9]+/', $pass))
+        return false;
+    else if (!preg_match('/[a-z]+/', $pass))
+        return false;
+    else if (!preg_match('/[A-Z]+/', $pass))
+        return false;
+    else if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+!-]/', $pass))
+        return false;
+    return true;
 }
 
 //RECAPTCHA
@@ -31,10 +35,10 @@ $secret = "6LcmcJUUAAAAAMP0q_0uqa0J7VirNEIijbxbYYu6";
 $response = $_POST['g-recaptcha-response'];
 // On récupère l'IP de l'utilisateur
 $remoteip = $_SERVER['REMOTE_ADDR'];
-$api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
+$api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
     . $secret
     . "&response=" . $response
-    . "&remoteip=" . $remoteip ;
+    . "&remoteip=" . $remoteip;
 $decode = json_decode(file_get_contents($api_url), true);
 
 //REGISTER
@@ -42,44 +46,108 @@ if (isset($_POST['register_submit'])) {
     $register_pseudo = htmlspecialchars($_POST['register_pseudo']);
     $register_email = htmlspecialchars($_POST['register_email']);
     $register_password = sha1($_POST['register_password']);
-    if(!empty($_POST['register_pseudo']) AND !empty($_POST['register_email']) AND !empty($_POST['register_password']))
-    {
-        if ($decode['success'] == true) {
-            if(pass_check($_POST['register_password']))
-            {
-                if(strlen($register_pseudo) <= 255 )
-                {
-                    $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
-                    $reqpseudo->execute(array($register_pseudo));
-                    if($reqpseudo->rowCount() == 0)
-                    {
-                        if(filter_var($register_email, FILTER_VALIDATE_EMAIL))
-                        {
-                            $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
-                            $reqmail->execute(array($register_email));
-                            if($reqmail->rowCount() == 0) {
-                                $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar, notif) VALUES(?, ?, ?, ?, ?)");
-                                $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg", 1));
-                                $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
+    if (!empty($_POST['register_pseudo']) and !empty($_POST['register_email']) and !empty($_POST['register_password'])) {
+        // if ($decode['success'] == true) {
+        if (pass_check($_POST['register_password'])) {
+            if (strlen($register_pseudo) <= 255) {
+                $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+                $reqpseudo->execute(array($register_pseudo));
+                if ($reqpseudo->rowCount() == 0) {
+                    if (filter_var($register_email, FILTER_VALIDATE_EMAIL)) {
+                        $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
+                        $reqmail->execute(array($register_email));
+                        if ($reqmail->rowCount() == 0) {
+
+                            $key = md5(microtime(true) * 100000);
+
+                            $insertmbr = $bdd->prepare("INSERT INTO member(pseudo, email, pass, avatar, notif, mail_key, confirm) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                            $insertmbr->execute(array($register_pseudo, $register_email, $register_password, "data/avatar_member/default.jpg", 1, $key, 0));
+
+
+
+
+
+
+
+
+
+
+                            $mail = 'weaponsb@mail.fr'; // Déclaration de l'adresse de destination.
+                            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui présentent des bogues.
+                            {
+                                $passage_ligne = "\r\n";
+                            } else {
+                                $passage_ligne = "\n";
                             }
-                            else 
-                                $register_error = "Adresse mail déjà utilisée !";
-                        }
-                        else
-                            $register_error = "entre un email valide";
-                    }
-                    else
-                        $register_error = "Pseudo déjà utilisée !";
-                }
-                else
-                    $register_error = "Pseudo ne doit pas depasser 255 car";
-            }
-            else
-                $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
+                                //=====Déclaration des messages au format texte et au format HTML.
+                            $message_txt = "Salut à tous, voici un e-mail envoyé par un script PHP.";
+                            $message_html = "<html><head></head><body><b>Salut à tous</b>, voici un e-mail envoyé par un <i>script PHP</i>.</body></html>";
+                                //==========
+                                
+
+                                //=====Création de la boundary.
+                            $boundary = "-----=" . md5(rand());
+                            $boundary_alt = "-----=" . md5(rand());
+                                //==========
+                                
+                                //=====Définition du sujet.
+                            $sujet = "Hey mon ami !";
+                                //=========
+                                
+                                //=====Création du header de l'e-mail.
+                            $header = "From: \"WeaponsB\"<weaponsb@mail.fr>" . $passage_ligne;
+                            $header .= "Reply-to: \"WeaponsB\" <weaponsb@mail.fr>" . $passage_ligne;
+                            $header .= "MIME-Version: 1.0" . $passage_ligne;
+                            $header .= "Content-Type: multipart/mixed;" . $passage_ligne . " boundary=\"$boundary\"" . $passage_ligne;
+                                //==========
+                                
+                                //=====Création du message.
+                            $message = $passage_ligne . "--" . $boundary . $passage_ligne;
+                            $message .= "Content-Type: multipart/alternative;" . $passage_ligne . " boundary=\"$boundary_alt\"" . $passage_ligne;
+                            $message .= $passage_ligne . "--" . $boundary_alt . $passage_ligne;
+                                //=====Ajout du message au format texte.
+                            $message .= "Content-Type: text/plain; charset=\"ISO-8859-1\"" . $passage_ligne;
+                            $message .= "Content-Transfer-Encoding: 8bit" . $passage_ligne;
+                            $message .= $passage_ligne . $message_txt . $passage_ligne;
+                                //==========
+
+                            $message .= $passage_ligne . "--" . $boundary_alt . $passage_ligne;
+                                
+                                //=====Ajout du message au format HTML.
+                            $message .= "Content-Type: text/html; charset=\"ISO-8859-1\"" . $passage_ligne;
+                            $message .= "Content-Transfer-Encoding: 8bit" . $passage_ligne;
+                            $message .= $passage_ligne . $message_html . $passage_ligne;
+                                //==========
+                                
+                                //=====On ferme la boundary alternative.
+                            $message .= $passage_ligne . "--" . $boundary_alt . "--" . $passage_ligne;
+                                //==========
+
+                           $message .= $passage_ligne . "--" . $boundary . $passage_ligne;
+                          
+  
+                            
+                            //=====Envoi de l'e-mail.
+    
+                            if (mail($register_email, $sujet, $message, $header))
+                                echo "Work work";
+                            else
+                                echo "pas work";
+
+                            $register_success = "Votre compte a bien été créé, valide le par mail fdp ! <a href=\"login.php\">Me connecter</a>";
+                        } else
+                            $register_error = "Adresse mail déjà utilisée !";
+                    } else
+                        $register_error = "entre un email valide";
+                } else
+                    $register_error = "Pseudo déjà utilisée !";
+            } else
+                $register_error = "Pseudo ne doit pas depasser 255 car";
         } else
-            $register_error = "Captcha ERROR";
-    }
-    else
+            $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
+        // } else
+            // $register_error = "Captcha ERROR";
+    } else
         $register_error = "All fields must be completed in this Section";
 }
 ?>
@@ -147,20 +215,24 @@ if (isset($_POST['register_submit'])) {
         <h1>Register<span> for Camagru Studio</span></h1>
 
         <form method="POST" action="">
-            <input id="register_pseudo" name="register_pseudo" value="<?php if(isset($register_pseudo)) {echo $register_pseudo;} ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
-            <input id="register_email" name="register_email" value="<?php if(isset($register_email)) {echo $register_email;} ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
+            <input id="register_pseudo" name="register_pseudo" value="<?php if (isset($register_pseudo)) {
+                                                                            echo $register_pseudo;
+                                                                        } ?>" type="text" placeholder="pseudo" required="required" maxlength="255" >
+            <input id="register_email" name="register_email" value="<?php if (isset($register_email)) {
+                                                                        echo $register_email;
+                                                                    } ?>" type="email" placeholder="E-mail" required="required" maxlength="255">
             <input id="register_password" name="register_password" type="password" placeholder="Password" required="required" minlength="8">
-            <div class="g-recaptcha" data-sitekey="6LcmcJUUAAAAAErxBXWYChbpIKnzikjM6OGyyQIv"></div>
+            <!-- <div class="g-recaptcha" data-sitekey="6LcmcJUUAAAAAErxBXWYChbpIKnzikjM6OGyyQIv"></div> -->
             <input id="register_submit" name="register_submit" type="submit" value="create my account">
         </form>
 
         <?php
-            if(isset($register_error)) {
-                echo $register_error;
-            }
-            if(isset($register_success)) {
-                echo $register_success;
-            }
+        if (isset($register_error)) {
+            echo $register_error;
+        }
+        if (isset($register_success)) {
+            echo $register_success;
+        }
         ?>
 
     </section>
