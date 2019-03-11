@@ -86,9 +86,13 @@ if (isset($_POST['change_submit']))
         if($change_old_password == $userinfo['pass'])
         {
             if($change_old_password != $change_password) {
-                $insertpass = $bdd->prepare("UPDATE member SET pass = ? WHERE id = ?");
-                $insertpass->execute(array($change_password, $_SESSION['id']));
-                header('Location: profile.php?user='.$_SESSION['pseudo']);
+                if (pass_check($_POST['register_password'])) {
+                    $insertpass = $bdd->prepare("UPDATE member SET pass = ? WHERE id = ?");
+                    $insertpass->execute(array($change_password, $_SESSION['id']));
+                    header('Location: profile.php?user='.$_SESSION['pseudo']);
+                }
+                else
+                    $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
              }
              else
                 $settings_error = "Votre ancien et nouveau mot de passe sont similaires";
@@ -163,7 +167,7 @@ if (isset($_POST['change_submit']))
     <section id="sect">
         <h1>Settings<span> , change your personel data</span></h1>
 
-        <form method="POST" action="" enctype= multipart/form-data>
+        <form method="POST" action="" enctype="multipart/form-data">
             <input id="change_pseudo" name="change_pseudo" type="text" placeholder="Pseudo" maxlength="180" value="<?php echo $userinfo['pseudo']?>">
             <input id="change_email" name="change_email" type="email" placeholder="E-mail" maxlength="180" value="<?php echo $userinfo['email']?>">
             <input id="change_avatar" name="change_avatar" type="file">

@@ -8,7 +8,6 @@ $login_pseudo = htmlspecialchars($_GET['log']);
 $key = htmlspecialchars($_GET['key']);
 
 if(!empty($login_pseudo) AND !empty($key)) {
-
     $requser = $bdd->prepare("SELECT mail_key, confirm, id FROM member WHERE pseudo = ?");
     $requser->execute(array($login_pseudo));
     $userexist = $requser->rowCount();
@@ -32,3 +31,5 @@ if(!empty($login_pseudo) AND !empty($key)) {
 }
 else
     echo "A Erreur ! Votre compte ne peut être activé...";
+
+?>
