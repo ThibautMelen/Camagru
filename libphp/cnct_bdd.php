@@ -10,5 +10,4 @@
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
-    // session_start();
 ?>

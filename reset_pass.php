@@ -32,36 +32,47 @@ if (isset($_POST['change_pass'])) {
     $key = htmlspecialchars($_GET['key']);
 
     if(!empty($user_id) AND !empty($key)) {
-        $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+        $requser = $bdd->prepare("SELECT * FROM member WHERE id = ?");
         $requser->execute(array($user_id));
         $userexist = $requser->rowCount();
         if($userexist == 1) {
             $userinfo = $requser->fetch();
 
-                if(isset($_POST['change_old_password']) && !empty($_POST['change_old_password']) && isset($_POST['change_password']) && !empty($_POST['change_password'])) {
-                    $change_old_password = sha1($_POST['change_old_password']);
+            $reqrecovery = $bdd->prepare("SELECT * FROM `recovery` WHERE mail = ?");
+            $reqrecovery->execute(array($userinfo['email']));
+            $keyinfo = $reqrecovery->fetch();
+
+            if(!empty($keyinfo['key_recov']) && $keyinfo['key_recov'] == $key)
+            {
+                if(isset($_POST['change_password']) && !empty($_POST['change_password']) && isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])) {
+                    $confirm_password = sha1($_POST['confirm_password']);
                     $change_password = sha1($_POST['change_password']);
-                    if($change_old_password == $userinfo['pass'])
-                    {
-                        if($change_old_password != $change_password) {
-                            if (pass_check($_POST['register_password'])) {
+                        if($confirm_password == $change_password) {
+                            if (pass_check($_POST['change_password'])) {
                                 $insertpass = $bdd->prepare("UPDATE member SET pass = ? WHERE id = ?");
                                 $insertpass->execute(array($change_password, $user_id));
-                                header('Location: ../login.php');
+                                $newkey = md5(microtime(true) * 100000);
+                                $changekey = $bdd->prepare("UPDATE `recovery` SET `key_recov` = ? WHERE mail = ?");
+                                $changekey->execute(array($newkey, $userinfo['email']));
+                                // header('Location: ../login.php');
                             }
                             else
-                                $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
+                                $reset_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
                         }
                         else
-                            $settings_error = "Votre ancien et nouveau mot de passe sont similaires";
-                    }
-                    else
-                        $settings_error = "Votre mot de passe n'est pas bon";  
-                }
-        }
-    }
+                            $reset_error = "Vos mot de passe ne sont pas similaire";
+                    }                        else
+                      $reset_error = "Veuillez remplir tous les champs nécessaire a reinitialisation de votre mot de passe";
+ 
+                }                        else
+                    $reset_error = "Un probleme est survenue lors de la modification du mot de passe";
+            }                        else
+                $reset_error = "Un probleme est survenue lors de la modification du mot de passe";
+        }                        else
+            $reset_error = "Un probleme est survenue lors de la modification du mot de passe";
 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -122,14 +133,17 @@ if (isset($_POST['change_pass'])) {
         <h1>Reset your password | Pass</h1>
 
         <form method="POST" action="">
-            <input id="change_old_password" name="change_old_password" type="password" placeholder="Old Password">
             <input id="change_password" name="change_password" type="password" placeholder="New Password">
+            <input id="confirm_password" name="confirm_password" type="password" placeholder="Confrim Password">
             <input id="change_pass" name="change_pass" type="submit" value="save">
         </form> 
         
         <?php
             if(isset($reset_error)) {
                 echo $reset_error;
+            }
+            if(isset($reset_success)) {
+                echo $reset_success;
             }
         ?>
 

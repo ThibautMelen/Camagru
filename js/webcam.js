@@ -35,19 +35,19 @@ const startWebcam = () => {
 
 //SREEN SHOT BUTTON
 screenshotButton.onclick = () => {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext('2d').drawImage(video, 0, 0);
-  webcamScreen = canvas.toDataURL('image/png');
-  webcamPreview.src = webcamScreen;
-  webcamPreview.style.visibility = "visible";
-  publishButton.style.display = "block";
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    webcamScreen = canvas.toDataURL('image/png');
+    webcamPreview.src = webcamScreen;
+    webcamPreview.style.visibility = "visible";
+    publishButton.style.display = "block";
 };
 
 cancelButton.onclick = () => {
     webcamPreview.style.visibility = "hidden";
     publishButton.style.display = "none";
-  };
+};
 
 function isValidImage(picInput) {
     let filePath = picInput.value;
@@ -74,9 +74,7 @@ publishButton.style.display = "block";
         {
             let ratio = imgObj.height / imgObj.width;
             canvas.getContext('2d').drawImage(imgObj,
-                //CE QU'ON PETA !!!!!!!
                 0, 0, imgObj.width, imgObj.height,
-                //ON METS CA OU ??????
                 0, (canvas.height / 2) - ((canvas.width * ratio) / 2),
                 canvas.width, canvas.width * ratio);
         }
@@ -84,9 +82,7 @@ publishButton.style.display = "block";
         {
           let ratio = 1;
           canvas.getContext('2d').drawImage(imgObj,
-              //CE QU'ON PETA !!!!!!!
               0, 0, imgObj.width, imgObj.height,
-              //ON METS CA OU ??????
               0, 0,
               canvas.width * ratio, canvas.height);
         }
@@ -173,7 +169,6 @@ document.getElementById('post-list').addEventListener(
   'scroll',
   function()
   {
-      // var clientHeight = document.getElementById('box').clientHeight;
       var contentHeight = document.getElementById('post-list').scrollHeight - document.getElementById('post-list').offsetHeight; // added
       if (contentHeight <= document.getElementById('post-list').scrollTop) // modified
         loadmore();

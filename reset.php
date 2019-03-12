@@ -45,7 +45,7 @@ if (isset($_POST['reset_submit'], $_POST['reset_email']))
             $message = $userinfo['id'] . ' - Réinitialisation de votre Mot de passe sur Camagru,
             Pour réinitialisation votre mot de passe, veuillez cliquer sur le lien ci dessous
             ou copier/coller dans votre navigateur internet.
-            http://localhost:8080/reset.php?log='.urlencode($userinfo['id']).'&key='.urlencode($key).'
+            http://localhost:8080/reset_pass.php?log='.urlencode($userinfo['id']).'&key='.urlencode($key).'
             ---------------
             Ceci est un mail automatique, Merci de ne pas y répondre.';
         
