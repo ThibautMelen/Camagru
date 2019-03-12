@@ -25,7 +25,7 @@ else
 <html lang="en">
 <head>
     <!-- INFO -->
-    <title>Camagru</title>
+    <title>Profile Camagru</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -34,14 +34,17 @@ else
     <link rel="stylesheet" type="text/css" href="css/global.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/global_app.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/animation.css" media="all"/>
-    <link rel="stylesheet" type="text/css" href="css/profile.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/galerie.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/profile.css" media="all"/>
+    <link rel="icon" href="data/favicon.ico" />
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
 </head>
 <body>
     <script async src="js/animation.js"></script>
+    <script async src="js/profile.js"></script>
+    <script async src="js/actionPost.js"></script>
 
     <!-- GLOBAL ELEMENT -->
     <div id="wrapper"></div>
@@ -88,6 +91,7 @@ else
             
         </header>
         
+        <!-- FULX POST HERE -->
         <div id="post-list">
         </div>
     </section>   

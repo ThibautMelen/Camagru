@@ -22,6 +22,7 @@ include('libphp/usr_nav.php');
     <link rel="stylesheet" type="text/css" href="css/global_app.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/animation.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/galerie.css" media="all"/>
+    <link rel="icon" href="data/favicon.ico" />
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">

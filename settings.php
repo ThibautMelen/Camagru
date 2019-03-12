@@ -114,7 +114,7 @@ if (isset($_POST['change_submit']))
 <html lang="en">
 <head>
     <!-- INFO -->
-    <title>Camagru</title>
+    <title>Settings</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -124,6 +124,7 @@ if (isset($_POST['change_submit']))
     <link rel="stylesheet" type="text/css" href="css/global_app.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/animation.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/reg_log.css" media="all"/>
+    <link rel="icon" href="data/favicon.ico" />
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">

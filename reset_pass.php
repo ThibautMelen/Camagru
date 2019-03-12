@@ -54,7 +54,7 @@ if (isset($_POST['change_pass'])) {
                                 $newkey = md5(microtime(true) * 100000);
                                 $changekey = $bdd->prepare("UPDATE `recovery` SET `key_recov` = ? WHERE mail = ?");
                                 $changekey->execute(array($newkey, $userinfo['email']));
-                                // header('Location: ../login.php');
+                                header('Location: ../login.php');
                             }
                             else
                                 $reset_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
@@ -89,6 +89,7 @@ if (isset($_POST['change_pass'])) {
     <link rel="stylesheet" type="text/css" href="css/global_app.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/animation.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/reg_log.css" media="all"/>
+    <link rel="icon" href="data/favicon.ico" />
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">

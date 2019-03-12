@@ -25,16 +25,13 @@ if (isset($_POST['reset_submit'], $_POST['reset_email']))
             $key = md5(microtime(true) * 100000);
 
             //INSERTION CODE RECUP BDD
-            echo $reset_email;
             $reqmailexist = $bdd->prepare('SELECT id FROM `recovery` WHERE mail = ?');
             $reqmailexist->execute(array($reset_email));
             $nb =  $reqmailexist->rowCount();
             if($reqmailexist->rowCount() == 1) {
-                echo "UPDATE";
                 $insertkey = $bdd->prepare("UPDATE `recovery` SET `key_recov` = ? WHERE mail = ?");
                 $insertkey->execute(array($key, $reset_email));
             } else {
-                echo "INSERT";
                 $insertkey = $bdd->prepare("INSERT INTO `recovery`(`mail`, `key_recov`) VALUES(?, ?)");
                 $insertkey->execute(array($reset_email, $key));
             }
@@ -73,6 +70,7 @@ if (isset($_POST['reset_submit'], $_POST['reset_email']))
     <link rel="stylesheet" type="text/css" href="css/global_app.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/animation.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="css/reg_log.css" media="all"/>
+    <link rel="icon" href="data/favicon.ico" />
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
