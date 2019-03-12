@@ -8,14 +8,13 @@ const loadmore = () => {
             if (this.status === 200) {
                 postlistDiv.innerHTML = this.responseText;
             } else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                // console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
             }
         }
     };
     req.open('POST', 'libphp/flux_post.php', true);
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send('nbPost=' + nbPost);
-    console.log(nbPost);
     nbPost += 4;
 }
 

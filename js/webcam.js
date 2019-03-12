@@ -24,7 +24,7 @@ const handleSuccess = (stream) => {
 }
 
 const handleError = (error) => {
-  console.error('Error: ', error);
+  alert("une erreur est survenue");
 }
 
 const startWebcam = () => {
@@ -58,7 +58,6 @@ function isValidImage(picInput) {
 
 // Preview of uploaded pic
 uploadImg.onchange = uploadImg.onload = () => {
-console.log(`Upload image...`);
 publishButton.style.display = "block";
   if (!isValidImage(uploadImg)) {
       uploadImg.value = "";
@@ -102,10 +101,10 @@ publishButton.onclick = () => {
   req.onreadystatechange = function(event) {
       if (this.readyState === XMLHttpRequest.DONE) {
           if (this.status === 200) {
-              console.log("Réponse reçue: %s", this.responseText);
+            //   console.log("Réponse reçue: %s", this.responseText);
               loadmore();
           } else {
-              console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+            //   console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
           }
       }
   };
@@ -132,14 +131,13 @@ const loadmore = () => {
             if (this.status === 200) {
                 postlistDiv.innerHTML = this.responseText;
             } else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                // console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
             }
         }
     };
     req.open('POST', 'libphp/flux_post_studio.php', true);
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send('nbPost=' + nbPost);
-    console.log(nbPost);
     nbPost += 2;
 }
 

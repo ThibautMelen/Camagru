@@ -9,7 +9,6 @@ const getUrlVars = () => {
     return vars;
 }
 let user = getUrlVars()["user"];
-console.log(user + "dfsf");
 
 const loadmore = () => {
     const req = new XMLHttpRequest();
@@ -18,14 +17,13 @@ const loadmore = () => {
             if (this.status === 200) {
                 postlistDiv.innerHTML = this.responseText;
             } else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                // console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
             }
         }
     };
     req.open('POST', 'libphp/flux_post_profile.php', true);
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send('nbPost=' + nbPost + '&user=' + user);
-    console.log(nbPost);
     nbPost += 4;
 }
 

@@ -9,7 +9,7 @@ const likePost = (id) => {
     req.onreadystatechange = function (event) {
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.status === 200) {
-                console.log(`Status's good | Response : ${this.responseText}`);
+                // console.log(`Status's good | Response : ${this.responseText}`);
                 if(this.responseText == "+1")
                 {
                     postSvgId.style.fill="#ee5552";
@@ -24,7 +24,7 @@ const likePost = (id) => {
                 }
             }
             else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                // console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
             }
         }
     };
@@ -41,14 +41,14 @@ const delPost = (id) => {
     req.onreadystatechange = function (event) {
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.status === 200) {
-                console.log(`Status's good | Response : ${this.responseText}`);
+                // console.log(`Status's good | Response : ${this.responseText}`);
                 if(this.responseText == "yes")
                     postId.remove();
                 else
                     alert("No authorized !");
             }
             else {
-                console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                // console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
             }
         }
     };
