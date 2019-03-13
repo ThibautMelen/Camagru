@@ -87,8 +87,7 @@ else
             <?php
                 if(isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $userinfo['pseudo'])
                     echo '<a href="settings.php">edit</a>';
-            ?>
-            
+            ?> 
         </header>
         
         <!-- FULX POST HERE -->

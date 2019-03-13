@@ -6,9 +6,6 @@ session_start();
 //GET POST JS nbPost
 $nbPost =  intval(htmlspecialchars($_POST['nbPost']));
 
-// IF IS LOG
-// if (islog())
-
 //GET DATA POST IN BDD
 $addDomPost = $bdd->prepare('SELECT pseudo, avatar, picture, like_nb, post.id FROM member INNER JOIN post ON member.id = post.member_id ORDER BY post.id DESC LIMIT '.$nbPost.'');
 $addDomPost->execute(array());

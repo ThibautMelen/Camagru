@@ -10,20 +10,7 @@ if (islog())
     header('Location: ../index.php');
 
 // FUNCTION PASSWORD HARD
-function pass_check($pass)
-{
-    if (strlen($pass) < 8)
-        return false;
-    else if (!preg_match('/[0-9]+/', $pass))
-        return false;
-    else if (!preg_match('/[a-z]+/', $pass))
-        return false;
-    else if (!preg_match('/[A-Z]+/', $pass))
-        return false;
-    else if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+!-]/', $pass))
-        return false;
-    return true;
-}
+include('libphp/pass_check.php');
 
 //CHANGE PASS
 if (isset($_POST['change_pass'])) {
@@ -61,15 +48,15 @@ if (isset($_POST['change_pass'])) {
                         }
                         else
                             $reset_error = "Vos mot de passe ne sont pas similaire";
-                    }                        else
+                    } else
                       $reset_error = "Veuillez remplir tous les champs nécessaire a reinitialisation de votre mot de passe";
  
-                }                        else
-                    $reset_error = "Un probleme est survenue lors de la modification du mot de passe";
-            }                        else
-                $reset_error = "Un probleme est survenue lors de la modification du mot de passe";
-        }                        else
-            $reset_error = "Un probleme est survenue lors de la modification du mot de passe";
+                } else
+                    $reset_error = "La reinitialisation de votre mot de passe a expirés";
+            } else
+                $reset_error = "Un probleme est survenue lors de la modification du mot de passe B";
+        } else
+            $reset_error = "Un probleme est survenue lors de la modification du mot de passe C";
 
 }
 
@@ -142,9 +129,6 @@ if (isset($_POST['change_pass'])) {
         <?php
             if(isset($reset_error)) {
                 echo $reset_error;
-            }
-            if(isset($reset_success)) {
-                echo $reset_success;
             }
         ?>
 

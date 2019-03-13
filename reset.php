@@ -47,6 +47,7 @@ if (isset($_POST['reset_submit'], $_POST['reset_email']))
             Ceci est un mail automatique, Merci de ne pas y répondre.';
         
             mail($reset_email, $sujet, $message, $header);
+            $reset_success = "Un mail de reinitaliation vous a etait envoyer";
     
         } else
             $reset_error = "Aucun compte ne corespond a cette adresse email";
@@ -122,6 +123,9 @@ if (isset($_POST['reset_submit'], $_POST['reset_email']))
         <?php
             if(isset($reset_error)) {
                 echo $reset_error;
+            }
+            if(isset($reset_success)) {
+                echo $reset_success;
             }
         ?>
 

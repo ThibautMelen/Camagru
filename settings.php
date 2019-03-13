@@ -8,6 +8,9 @@ include('libphp/usr_nav.php');
 if (!(islog()))
     header('Location: ../index.php');
 
+// FUNCTION PASSWORD HARD
+include('libphp/pass_check.php');
+
 //PROFILE SETTING INFO
 if(isset($_SESSION['pseudo'])) {
     $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
@@ -86,7 +89,7 @@ if (isset($_POST['change_submit']))
         if($change_old_password == $userinfo['pass'])
         {
             if($change_old_password != $change_password) {
-                if (pass_check($_POST['register_password'])) {
+                if (pass_check($_POST['change_password'])) {
                     $insertpass = $bdd->prepare("UPDATE member SET pass = ? WHERE id = ?");
                     $insertpass->execute(array($change_password, $_SESSION['id']));
                     header('Location: profile.php?user='.$_SESSION['pseudo']);

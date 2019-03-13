@@ -24,7 +24,7 @@ const handleSuccess = (stream) => {
 }
 
 const handleError = (error) => {
-  alert("une erreur est survenue");
+  alert("Une erreur est survenue lors du chargement de la Webcam");
 }
 
 const startWebcam = () => {
@@ -131,7 +131,7 @@ const loadmore = () => {
             if (this.status === 200) {
                 postlistDiv.innerHTML = this.responseText;
             } else {
-                // console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                // console.log3("Status de la réponse: %d (%s)", this.status, this.statusText);
             }
         }
     };
