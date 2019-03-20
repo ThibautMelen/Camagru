@@ -12,7 +12,8 @@ if (!(islog()))
 include('libphp/pass_check.php');
 
 //PROFILE SETTING INFO
-if(isset($_SESSION['pseudo'])) {
+if (islog())
+{
     $requser = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
     $requser->execute(array($_SESSION['pseudo']));
     $userexist = $requser->rowCount();
@@ -26,21 +27,32 @@ else
     header('Location: ../login.php');
 
 //NEW AREA
-if (isset($_POST['change_submit']))
+if (isset($_POST['change_submit']) && islog())
 {
-    if(isset($_POST['change_pseudo']) && !empty($_POST['change_pseudo']) && $_POST['change_pseudo'] != $userinfo['pseudo']) {
-        $change_pseudo = htmlspecialchars($_POST['change_pseudo']);
-        $insertpseudo = $bdd->prepare("UPDATE member SET pseudo = ? WHERE id = ?");
-        $insertpseudo->execute(array($change_pseudo, $_SESSION['id']));
-        $_SESSION['pseudo'] = $change_pseudo;
-        header('Location: profile.php?user='.$_SESSION['pseudo']);
+    if(isset($_POST['change_pseudo']) && !empty($_POST['change_pseudo']) && $_POST['change_pseudo'] != $userinfo['pseudo']) {   
+        $reqpseudo = $bdd->prepare("SELECT * FROM member WHERE pseudo = ?");
+        $reqpseudo->execute(array($_POST['change_pseudo']));
+        if ($reqpseudo->rowCount() == 0) {
+            $change_pseudo = htmlspecialchars($_POST['change_pseudo']);
+            $insertpseudo = $bdd->prepare("UPDATE member SET pseudo = ? WHERE id = ?");
+            $insertpseudo->execute(array($change_pseudo, $_SESSION['id']));
+            $_SESSION['pseudo'] = $change_pseudo;
+            header('Location: profile.php?user='.$_SESSION['pseudo']);
+    
+        }else
+            $settings_error = "Ce nom d'utilisateur est deja pris";
     }
     if(isset($_POST['change_email']) && !empty($_POST['change_email']) && $_POST['change_email'] != $userinfo['email']) {
-        $change_email = htmlspecialchars($_POST['change_email']);
-        $insertemail = $bdd->prepare("UPDATE member SET email = ? WHERE id = ?");
-        $insertemail->execute(array($change_email, $_SESSION['id']));
-        $_SESSION['email'] = $change_email;
-        header('Location: profile.php?user='.$_SESSION['pseudo']);
+        $reqmail = $bdd->prepare("SELECT * FROM member WHERE email = ?");
+        $reqmail->execute(array($_POST['change_email']));
+        if ($reqmail->rowCount() == 0) {
+            $change_email = htmlspecialchars($_POST['change_email']);
+            $insertemail = $bdd->prepare("UPDATE member SET email = ? WHERE id = ?");
+            $insertemail->execute(array($change_email, $_SESSION['id']));
+            $_SESSION['email'] = $change_email;
+            header('Location: profile.php?user='.$_SESSION['pseudo']);
+        }else
+            $settings_error = "Ce mail est deja pris";
     }
     //CHANGE NOTIFICATION PREF
     if(isset($_POST['change_notif']) && !empty($_POST['change_notif'])) {
@@ -94,7 +106,7 @@ if (isset($_POST['change_submit']))
                     header('Location: profile.php?user='.$_SESSION['pseudo']);
                 }
                 else
-                    $register_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
+                    $settings_error = "Votre mot de passe doit comporter un minimum de 8 caractères, se composer de chiffres et de lettres, doit comprendre des majuscules/minuscules et des caractères spéciaux.";
              }
              else
                 $settings_error = "Votre ancien et nouveau mot de passe sont similaires";
@@ -175,8 +187,8 @@ if (isset($_POST['change_submit']))
             <input id="change_email" name="change_email" type="email" placeholder="E-mail" maxlength="180" value="<?php echo $userinfo['email']?>">
             <input id="change_avatar" name="change_avatar" type="file">
             <select id="change_notif" name="change_notif" >
-                <option value="notif_true" selected>Les notifications par mail sont activée</option> 
-                <option value="notif_false" <?php if($_SESSION['notif'] == 2) echo selected ?>>Les notifications par mail sont désactivée</option>
+                <option value="notif_true" <?php if($_SESSION['notif'] == 1) echo 'selected' ?>>Les notifications par mail sont activée</option> 
+                <option value="notif_false" <?php if($_SESSION['notif'] == 2) echo 'selected' ?>>Les notifications par mail sont désactivée</option>
             </select>
             <input id="change_old_password" name="change_old_password" type="password" placeholder="Old Password">
             <input id="change_password" name="change_password" type="password" placeholder="New Password">

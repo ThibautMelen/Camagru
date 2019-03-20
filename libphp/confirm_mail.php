@@ -23,13 +23,13 @@ if(!empty($login_pseudo) AND !empty($key)) {
             header('Location: ../login.php');
           }
           else
-            echo "C Erreur ! Votre compte ne peut être activé...";
+            echo "Votre compte ne peut être activé...";
         }
     }
     else
-      echo "B Erreur ! Votre compte ne peut être activé...";
+      echo "Votre compte ne peut être activé...";
 }
 else
-    echo "A Erreur ! Votre compte ne peut être activé...";
+    echo "Votre compte ne peut être activé...";
 
 ?>
