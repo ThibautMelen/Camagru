@@ -9,27 +9,26 @@ include('libphp/islog.php');
 if (islog())
     header('Location: ../index.php');
 
-//FUNCTION CONFIRM_MAIL
-include('libphp/confirm_mail.php');
-
 // FUNCTION PASSWORD HARD
 include('libphp/pass_check.php');
 
-//RECAPTCHA
-// clé privée
-$secret = "6LcmcJUUAAAAAMP0q_0uqa0J7VirNEIijbxbYYu6";
-// Paramètre renvoyé par le recaptcha
-$response = $_POST['g-recaptcha-response'];
-// On récupère l'IP de l'utilisateur
-$remoteip = $_SERVER['REMOTE_ADDR'];
-$api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
-    . $secret
-    . "&response=" . $response
-    . "&remoteip=" . $remoteip;
-$decode = json_decode(file_get_contents($api_url), true);
 
 //REGISTER
 if (isset($_POST['register_submit'])) {
+    //RECAPTCHA
+    // clé privée
+    $secret = "6LcmcJUUAAAAAMP0q_0uqa0J7VirNEIijbxbYYu6";
+    // Paramètre renvoyé par le recaptcha
+    $response = $_POST['g-recaptcha-response'];
+    // On récupère l'IP de l'utilisateur
+    $remoteip = $_SERVER['REMOTE_ADDR'];
+    $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+        . $secret
+        . "&response=" . $response
+        . "&remoteip=" . $remoteip;
+    $decode = json_decode(file_get_contents($api_url), true);
+
+    //Info register
     $register_pseudo = htmlspecialchars($_POST['register_pseudo']);
     $register_email = htmlspecialchars($_POST['register_email']);
     $register_password = sha1($_POST['register_password']);
@@ -55,7 +54,7 @@ if (isset($_POST['register_submit'])) {
                                 $message = 'Bienvenue sur Camagru,
                                 Pour activer votre compte, veuillez cliquer sur le lien ci dessous
                                 ou copier/coller dans votre navigateur internet.
-                                http://localhost:8080/confirm_mail.php?log='.urlencode($register_pseudo).'&key='.urlencode($key).'
+                                http://localhost:8080/libphp/confirm_mail.php?log='.urlencode($register_pseudo).'&key='.urlencode($key).'
                                 ---------------
                                 Ceci est un mail automatique, Merci de ne pas y répondre.';
                                 

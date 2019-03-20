@@ -81,7 +81,6 @@ if (isset($_POST['change_submit']))
         }
         else
             $settings_error = "Votre image de profil doit faire moins de 2Mo";
-
     }
     if(isset($_POST['change_old_password']) && !empty($_POST['change_old_password']) && isset($_POST['change_password']) && !empty($_POST['change_password'])) {
         $change_old_password = sha1($_POST['change_old_password']);

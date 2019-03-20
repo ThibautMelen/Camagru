@@ -1,6 +1,6 @@
 <?php
 // CONEXION A LA BDD
-include('libphp/cnct_bdd.php');
+include('cnct_bdd.php');
 session_start();
 
 //CONFIRM_MAIL
